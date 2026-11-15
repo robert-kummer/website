@@ -40,4 +40,4 @@ Werkzeuge, Software und Dienste, die ich jeden Tag nutze. Keine Werbung, keine P
 - **Mac mini** mit zwei 24-Zoll-Monitoren
 - **Røde-Mikrofon** für die Stimme in Remote-Workshops
 - **Logitech Brio 4K** als Webcam
-- **Logitech MX Master** als Tastatur und Maus
+- **Logitech MX Keys** als Tastatur und **MX Master** als Maus
