@@ -485,7 +485,7 @@ def build(args: argparse.Namespace) -> Path:
         jsonld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
         jsonld = jsonld.replace("</", "<\\/")
 
-        robots = "noindex, nofollow" if args.preview else meta.get("robots", "index, follow, max-image-preview:large")
+        robots = "noindex, nofollow" if args.preview else meta.get("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1")
         page_ctx = {
             **ctx,
             "csp_meta": csp_meta, "origin_trial_meta": origin_trial_meta,
