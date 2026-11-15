@@ -12,6 +12,7 @@ import base64
 import datetime as dt
 import hashlib
 import html
+import urllib.parse
 import json
 import re
 import shutil
@@ -26,6 +27,10 @@ PLACEHOLDER = re.compile(r"\{\{\s*([A-Za-z_][\w.]*)\s*\}\}")
 
 class Raw(str):
     """Bereits fertiges HTML, wird beim Einsetzen nicht escaped."""
+
+
+class Partial(Raw):
+    """HTML-Baustein aus src/partials/, seine Platzhalter (z. B. {{base}}) werden beim Einsetzen ersetzt."""
 
 
 # ---------------------------------------------------------------------------
@@ -51,6 +56,8 @@ def render(template: str, ctx: dict, *, escape: bool, source: str) -> str:
             sys.exit(f"{source}: unbekannter Platzhalter {{{{{key}}}}}")
         if isinstance(value, (dict, list)):
             sys.exit(f"{source}: {{{{{key}}}}} ist kein einzelner Wert")
+        if isinstance(value, Partial):
+            return render(value, ctx, escape=escape, source=f"{source} > {key}")
         text = str(value)
         if escape and not isinstance(value, Raw):
             text = html.escape(text, quote=True)
@@ -108,21 +115,47 @@ def inline(text: str) -> str:
     return re.sub(r"\x00(\d+)\x00", lambda m: stash[int(m.group(1))], text)
 
 
+FENCE = re.compile(r"^```([\w-]*)[^\n]*\n(.*?)\n```[ \t]*$", re.M | re.S)
+
+
+def code_block(lang: str, code: str) -> str:
+    cls = f' class="language-{lang}"' if lang else ""
+    # tabindex: lange Zeilen scrollen waagerecht, der Bereich muss per Tastatur erreichbar sein
+    return f'<pre tabindex="0"><code{cls}>{html.escape(code, quote=False)}</code></pre>'
+
+
 def markdown_to_html(md: str) -> str:
     out: list[str] = []
+    # Codeblöcke vorab herausnehmen, damit Leerzeilen darin keine neuen Absätze erzeugen
+    fenced: list[str] = []
+
+    def stash_fence(m: re.Match) -> str:
+        fenced.append(code_block(m.group(1), m.group(2)))
+        return f"\x00FENCE{len(fenced) - 1}\x00"
+
+    md = FENCE.sub(stash_fence, md)
     blocks = re.split(r"\n\s*\n", md.strip())
     for block in blocks:
         lines = block.splitlines()
         first = lines[0]
         heading = re.match(r"(#{1,4})\s+(.*)", first) if len(lines) == 1 else None
-        if heading:
+        fence = re.fullmatch(r"\x00FENCE(\d+)\x00", block.strip())
+        if fence:
+            out.append(fenced[int(fence.group(1))])
+        elif heading:
             level, title = len(heading.group(1)), heading.group(2).strip()
             out.append(f'<h{level} id="{slug(title)}">{inline(title)}</h{level}>')
         elif re.match(r"<(?!https?://)[a-zA-Z/!]", first):
             out.append(block)
         elif all(re.match(r"\s*[-*]\s+", l) or l.startswith("  ") for l in lines):
-            items = re.split(r"\n(?=\s*[-*]\s+)", block)
-            out.append("<ul>\n" + "\n".join("<li>" + inline(re.sub(r"^\s*[-*]\s+", "", i).strip()) + "</li>" for i in items) + "\n</ul>")
+            items = [re.sub(r"^\s*[-*]\s+", "", i).strip() for i in re.split(r"\n(?=\s*[-*]\s+)", block)]
+            if all(re.match(r"\[[ xX]\]\s", i) for i in items):
+                # Checkliste zum Abhaken: ohne Skript, nichts wird gespeichert
+                out.append('<ul class="checklist" role="list">\n' + "\n".join(
+                    '<li><label><input type="checkbox"' + (" checked" if i[1] in "xX" else "") + "> <span>"
+                    + inline(i[3:].strip()) + "</span></label></li>" for i in items) + "\n</ul>")
+            else:
+                out.append("<ul>\n" + "\n".join("<li>" + inline(i) + "</li>" for i in items) + "\n</ul>")
         elif re.match(r"\d+\.\s+", first):
             items = re.split(r"\n(?=\d+\.\s+)", block)
             out.append("<ol>\n" + "\n".join("<li>" + inline(re.sub(r"^\d+\.\s+", "", i).strip()) + "</li>" for i in items) + "\n</ol>")
@@ -192,11 +225,11 @@ def tool_definitions(data: dict, page_ids: list[str]) -> list[dict]:
         {
             "name": "calculate_workshop_price",
             "title": "Workshop-Preis berechnen",
-            "description": "Berechnet den Preis für den Workshop nach Dauer, Zeitpunkt und Ort. Preise in Euro, keine Umsatzsteuer nach § 19 UStG.",
+            "description": "Berechnet den Preis für den Workshop nach Dauer, Zeitpunkt und Ort. Ein Tag umfasst 8 Stunden. Preise in Euro, keine Umsatzsteuer nach § 19 UStG.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "days": {"type": "integer", "enum": offer["days"], "description": "Anzahl der Workshop-Tage"},
+                    "days": {"type": "integer", "enum": offer["days"], "description": "Anzahl der Workshop-Tage, je 8 Stunden"},
                     "timing": {"type": "string", "enum": ["weekend", "weekday"],
                                "description": f"weekend = Freitag bis Sonntag, weekday = Montag bis Donnerstag ({euro(offer['weekdaySurchargePerDay'])} Aufschlag pro Tag)"},
                     "location": {"type": "string", "enum": ["remote", "onsite"],
@@ -264,22 +297,55 @@ def build(args: argparse.Namespace) -> Path:
     page_ids = [p["id"] for p in listed]
 
     # Gemeinsamer Kontext ----------------------------------------------------
-    kickoff_href = "mailto:" + person["email"] + "?subject=" + "Kickoff-Gespr%C3%A4ch"
+    kickoff_mail = "mailto:" + person["email"] + "?" + urllib.parse.urlencode({
+        "subject": "Kickoff-Gespräch",
+        "body": "Hallo Robert,\n\nich hätte gern ein Kickoff-Gespräch. Um diesen Ablauf geht es:\n\n\nPassende Termine:\n\n",
+    }, quote_via=urllib.parse.quote)
+    # Anfrage aus dem Preisrechner: Standardauswahl, site.js setzt sie bei jeder Änderung neu (gleicher Text)
+    workshop_mail = "mailto:" + person["email"] + "?" + urllib.parse.urlencode({
+        "subject": "Workshop-Anfrage: 2 Tage, Fr–So, Remote",
+        "body": "Hallo Robert,\n\nich interessiere mich für den Workshop „" + offer["name"] + "“:\n\n"
+                "- Dauer: 2 Tage (16 Stunden)\n- Wann: Freitag bis Sonntag\n- Wo: Remote\n- Preis laut Rechner: 2.000 €\n\n"
+                "Um diesen Ablauf geht es:\n\n\nPassende Termine:\n\n",
+    }, quote_via=urllib.parse.quote)
+    booking_url = offer.get("bookingUrl", "")
+    kickoff_href = booking_url or kickoff_mail
     steps = offer["steps"]
-    steps_html = Raw('<ol class="steps">\n' + "\n".join(
-        "      <li" + (' class="is-current"' if s["when"] == "Tag 1" else "") + ">"
-        f'<p class="meta">{i + 1:02d} · {html.escape(s["when"])}</p>'
-        f'<h3>{html.escape(s["title"])}</h3><p>{html.escape(s["text"])}</p></li>'
-        for i, s in enumerate(steps)) + "\n    </ol>")
+    def step_link(s):
+        link = s.get("link")
+        return f' <a href="{html.escape(link["href"])}">{html.escape(link["label"])}</a>' if link else ""
+    steps_html = Raw('<ol class="steps" role="list">\n' + "\n".join(
+        "      <li" + (' class="is-current"' if s.get("highlight") else "") + ">"
+        f'<p class="meta">{html.escape(s["when"])}</p>'
+        f'<h3>{html.escape(s["title"])}</h3><p>{html.escape(s["text"])}{step_link(s)}</p></li>'
+        for s in steps) + "\n    </ol>")
     faq_html = Raw("\n".join(
         f'      <details class="faq" name="faq"{" open" if i == 0 else ""}>'
         f'<summary>{html.escape(f["q"])}</summary><p>{html.escape(f["a"])}</p></details>'
         for i, f in enumerate(data["faq"])))
+    # Kundenstimmen: optional. Leerer Text erzeugt nichts, die Stelle bleibt dann einfach leer.
+    # short steht auf der Startseite, full auf der Referenzseite (fehlt full, wird short genommen).
+    def testimonial(t):
+        who = html.escape(t["name"] + (", " + t["role"] if t.get("role") else ""))
+        # Daumen hoch, nur auf der Folie: rechts unten im Zitat, rein dekorativ
+        thumb = ('<svg class="slide-quote-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+                 'stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false">'
+                 '<path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3l4-7c1.7 0 2.8 1.3 2.4 3L13 10h5.6a2 2 0 0 1 2 2.4l-1.3 6A2 2 0 0 1 17.3 20H7"/></svg>')
+        def fig(text, cls):
+            icon = thumb if cls == "slide-quote" else ""
+            return Raw(f'<figure class="{cls}"><blockquote><p>„{html.escape(text)}“</p></blockquote>'
+                       f'<figcaption class="meta"><span>{who}</span>{icon}</figcaption></figure>') if text else Raw("")
+        short, full = t.get("short", "").strip(), (t.get("full", "").strip() or t.get("short", "").strip())
+        return {"short": fig(short, "slide-quote"), "full": fig(full, "testimonial"),
+                "short_md": Raw(f" {t['name']}: „{short}“") if short else Raw("")}
+    testimonials = {k: testimonial(v) for k, v in data.get("testimonials", {}).items()}
     ctx = {
-        "site": site, "person": person, "offer": offer, "base": base,
-        "kickoff_href": kickoff_href,
+        "site": site, "person": person, "offer": offer, "base": base, "testimonial": testimonials,
+        "kickoff_href": kickoff_href, "kickoff_mail": kickoff_mail, "workshop_mail": workshop_mail, "booking_url": booking_url,
         "steps_html": steps_html, "faq_html": faq_html,
-        "steps_md": "\n".join(f"{i + 1}. **{s['when']}, {s['title']}:** {s['text']}" for i, s in enumerate(steps)),
+        # Wiederverwendbare HTML-Bausteine aus src/partials/, z. B. {{partials.instaposter_flow}}
+        "partials": {f.stem: Partial(f.read_text(encoding="utf-8").strip()) for f in sorted((SRC / "partials").glob("*.html"))},
+        "steps_md": "\n".join(f"{i + 1}. **{s['when']}, {s['title']}:** {s['text']}" + (f" [{s['link']['label']}]({site_url}{s['link']['href']})" if s.get("link") else "") for i, s in enumerate(steps)),
         "deliverables_md": "\n".join(f"- {d}" for d in offer["deliverables"]),
         "faq_md": "\n\n".join(f"### {f['q']}\n\n{f['a']}" for f in data["faq"]),
     }
@@ -294,6 +360,7 @@ def build(args: argparse.Namespace) -> Path:
                     "locality": person["locality"], "country": person["country"]},
         "website": site_url, "vcard": site_url + person["vcard"],
         "profiles": {s["label"]: s["url"] for s in person["sameAs"]},
+        "kickoffBooking": offer.get("bookingUrl") or None,
     }
     tools = tool_definitions(data, page_ids)
     site_data = {
@@ -459,7 +526,8 @@ def build(args: argparse.Namespace) -> Path:
     llms = [f"# {site['name']}", "", f"> {offer['summary']}", "",
             f"{person['name']} ist {person['jobTitle']} in {person['locality']}. "
             f"Angebot: Workshop „{offer['name']}“, {euro(offer['pricePerDay'])} pro Tag "
-            f"({offer['preferredTiming']}), unter der Woche {euro(offer['pricePerDay'] + offer['weekdaySurchargePerDay'])} pro Tag. "
+            f"({offer['preferredTiming']}), unter der Woche {euro(offer['pricePerDay'] + offer['weekdaySurchargePerDay'])} pro Tag, "
+            f"ein Tag umfasst {offer['hoursPerDay']} Stunden. "
             f"Kontakt: {person['email']}, {person['telephone']}.", ""]
     for title, items in sections.items():
         llms.append(f"## {title}")

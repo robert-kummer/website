@@ -19,13 +19,17 @@ function calculatePrice({ days = SITE.offer.recommendedDays, timing = 'weekend',
   const base = d * SITE.offer.pricePerDay;
   const surcharge = timing === 'weekday' ? d * SITE.offer.weekdaySurchargePerDay : 0;
   const parts = [`${d} × ${euro.format(SITE.offer.pricePerDay)}`];
-  if (surcharge) parts.push(`+ ${d} × ${euro.format(SITE.offer.weekdaySurchargePerDay)} Mo–Do`);
+  if (surcharge) parts[0] += ` + ${d} × ${euro.format(SITE.offer.weekdaySurchargePerDay)} Mo–Do`;
+  parts.push(`${d * SITE.offer.hoursPerDay} Stunden`);
   parts.push(location === 'onsite' ? 'zzgl. Reisekosten' : 'remote');
 
   return {
     days: d,
     timing,
     location,
+    hoursPerDay: SITE.offer.hoursPerDay,
+    hours: d * SITE.offer.hoursPerDay,
+    dayNote: SITE.offer.dayNote,
     currency: SITE.offer.currency,
     base,
     weekdaySurcharge: surcharge,
@@ -43,6 +47,25 @@ const DAY_HINTS = {
 };
 
 const form = document.getElementById('price-form');
+const calcMail = document.getElementById('calc-mail');
+
+// E-Mail-Anfrage mit der Auswahl aus dem Rechner (Standardtext kommt aus build.py, gleicher Aufbau)
+function workshopMail(price) {
+  const days = price.days === 1 ? '1 Tag' : `${price.days} Tage`;
+  const when = price.timing === 'weekday' ? 'Mo–Do' : 'Fr–So';
+  const where = price.location === 'onsite' ? 'Vor Ort' : 'Remote';
+  const lines = [
+    'Hallo Robert,', '',
+    `ich interessiere mich für den Workshop „${SITE.offer.name}“:`, '',
+    `- Dauer: ${days} (${price.hours} Stunden)`,
+    `- Wann: ${price.timing === 'weekday' ? 'Montag bis Donnerstag' : 'Freitag bis Sonntag'}`,
+    `- Wo: ${price.location === 'onsite' ? 'Vor Ort (zzgl. Reisekosten)' : 'Remote'}`,
+    `- Preis laut Rechner: ${euro.format(price.total)}`, '',
+    'Um diesen Ablauf geht es:', '', '',
+    'Passende Termine:', '', '',
+  ];
+  return `mailto:${SITE.contact.email}?subject=${encodeURIComponent(`Workshop-Anfrage: ${days}, ${when}, ${where}`)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
 
 function renderPrice() {
   const data = new FormData(form);
@@ -50,6 +73,7 @@ function renderPrice() {
   document.getElementById('total').textContent = euro.format(price.total);
   document.getElementById('breakdown').textContent = price.breakdown;
   document.getElementById('dayHint').textContent = DAY_HINTS[price.days];
+  if (calcMail) calcMail.href = workshopMail(price);
   return price;
 }
 
@@ -98,10 +122,10 @@ for (const carousel of document.querySelectorAll('.carousel')) {
     if (event.key === 'ArrowRight') { event.preventDefault(); go(index + 1); }
   });
 
-  // Maus: Ziehen wie beim Wischen. Touch scrollt nativ, Trackpad und Umschalt+Mausrad ebenfalls.
+  // Maus: Ziehen wie beim Wischen (nicht in der inneren Bildleiste). Touch scrollt nativ, Trackpad und Umschalt+Mausrad ebenfalls.
   let drag = null;
   track.addEventListener('pointerdown', (event) => {
-    if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('a, button, input, select, textarea')) return;
+    if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('a, button, input, select, textarea, .shots')) return;
     event.preventDefault();
     drag = { x: event.clientX, left: track.scrollLeft, start: index, moved: false, id: event.pointerId };
   });
@@ -138,6 +162,69 @@ for (const carousel of document.querySelectorAll('.carousel')) {
   carousel.querySelector('.carousel-controls').hidden = false;
   carousel.classList.add('is-enhanced');
   update(0);
+}
+
+// ---------------------------------------------------------------------------
+// Bildleiste je Referenz: Pfeile auf den Bildern, Klick aufs angeschnittene Nachbarbild fährt es herein
+// ---------------------------------------------------------------------------
+
+for (const gallery of document.querySelectorAll('.gallery')) {
+  const strip = gallery.querySelector('.shots');
+  const items = [...strip.children];
+  if (items.length < 2) continue;
+  const button = (dir, label, text) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = `gallery-nav gallery-${dir}`; b.setAttribute('aria-label', label); b.textContent = text;
+    gallery.append(b); return b;
+  };
+  const prev = button('prev', 'Vorheriges Bild', '←');
+  const next = button('next', 'Nächstes Bild', '→');
+  let index = 0;
+
+  const update = () => {
+    const left = strip.getBoundingClientRect().left;
+    index = items.reduce((best, item, n) =>
+      Math.abs(item.getBoundingClientRect().left - left) < Math.abs(items[best].getBoundingClientRect().left - left) ? n : best, 0);
+    prev.hidden = index === 0;
+    next.hidden = index === items.length - 1;
+  };
+  const go = (i) => {
+    const target = items[Math.max(0, Math.min(items.length - 1, i))];
+    strip.scrollTo({ left: strip.scrollLeft + target.getBoundingClientRect().left - strip.getBoundingClientRect().left });
+  };
+
+  prev.addEventListener('click', () => go(index - 1));
+  next.addEventListener('click', () => go(index + 1));
+  // Klick auf das angeschnittene Nachbarbild fährt es herein, statt die Großansicht zu öffnen
+  strip.addEventListener('click', (event) => {
+    const item = event.target.closest('.shots > *');
+    const n = items.indexOf(item);
+    if (n < 0 || n === index) return;
+    event.preventDefault();
+    go(n);
+  }, true);
+  strip.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  update();
+}
+
+// ---------------------------------------------------------------------------
+// Split-Button: Popover sitzt per Anchor Positioning am Pfeil, sonst per JS
+// ---------------------------------------------------------------------------
+
+if (!CSS.supports('position-area', 'bottom')) {
+  for (const menu of document.querySelectorAll('.split-menu[popover]')) {
+    const toggle = document.querySelector(`[popovertarget="${menu.id}"]`);
+    const close = () => menu.hidePopover();
+    menu.addEventListener('toggle', (event) => {
+      if (event.newState !== 'open') { removeEventListener('scroll', close); return; }
+      const r = toggle.getBoundingClientRect();
+      menu.style.position = 'fixed';
+      menu.style.top = `${r.bottom + 6}px`;
+      menu.style.left = `${Math.max(8, r.right - menu.offsetWidth)}px`;
+      menu.style.margin = '0';
+      addEventListener('scroll', close, { once: true, passive: true });
+    });
+  }
 }
 
 // ---------------------------------------------------------------------------

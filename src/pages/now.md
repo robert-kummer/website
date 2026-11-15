@@ -15,7 +15,7 @@ Eine [/now-Seite](https://nownownow.com/about) zeigt, worauf ich mich gerade kon
 ## Arbeit
 
 - **Workshops „Produktiv in 12 Stunden“.** Ich baue mit kleinen Firmen an einem Wochenende eine App für ihren zeitraubendsten Ablauf.
-- **Lead Developer.** Ich arbeite an einem firmeninternen ERP auf PHP-Basis. Dazu baue ich eine Middleware, die Abrechnungspositionen aus verschiedenen Produkten bündelt und daraus gemeinsame Rechnungen erstellt, nach Kunden- und Preisregeln. So pflegt das Unternehmen seine Preislisten nur noch an einer Stelle.
+- **<span lang="en">Lead Software Engineer</span>.** Ich arbeite an einem firmeninternen ERP auf PHP-Basis. Dazu baue ich eine Middleware, die Abrechnungspositionen aus verschiedenen Produkten bündelt und daraus gemeinsame Rechnungen erstellt, nach Kunden- und Preisregeln. So pflegt das Unternehmen seine Preislisten nur noch an einer Stelle.
 
 ## Open Source
 

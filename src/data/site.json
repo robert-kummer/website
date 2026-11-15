@@ -4,7 +4,7 @@
     "url": "https://robert-kummer.de/",
     "lang": "de",
     "locale": "de_DE",
-    "description": "Ein Workshop für Selbstständige und Unternehmen bis 50 Mitarbeitende: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "description": "Ein Workshop für Selbstständige und Unternehmen bis 50 Beschäftigte: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
     "themeColor": "#0E1013",
     "webmcpOriginTrial": ""
   },
@@ -39,10 +39,12 @@
   },
   "offer": {
     "name": "Produktiv in 12 Stunden",
-    "summary": "Workshop für Selbstständige und Unternehmen bis 50 Mitarbeitende: Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
-    "audience": "Selbstständige und Unternehmen bis 50 Mitarbeitende, interne Abläufe",
+    "summary": "Workshop für Selbstständige und Unternehmen bis 50 Beschäftigte: Du bringst einen Ablauf mit, der dich oder dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "audience": "Selbstständige und Unternehmen bis 50 Beschäftigte, interne Abläufe",
     "currency": "EUR",
     "pricePerDay": 1000,
+    "hoursPerDay": 8,
+    "dayNote": "Ein Workshop-Tag umfasst 8 Stunden Arbeitszeit, dazu kommt eine Stunde Pause. Der Tagessatz ist keine Flatrate.",
     "weekdaySurchargePerDay": 500,
     "days": [
       1,
@@ -53,28 +55,28 @@
     "preferredTiming": "Freitag bis Sonntag",
     "remote": "ohne Aufpreis",
     "onsite": "zzgl. Reisekosten nach Aufwand",
-    "vatNote": "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.",
+    "vatNote": "Kleinunternehmer nach § 19 UStG: Alle Preise sind Endpreise, Umsatzsteuer wird nicht berechnet und nicht ausgewiesen.",
     "requirement": "Du hast schon Zugriff auf die Daten, die dein Ablauf braucht: Exporte, Postfach, API-Zugang oder Dateien.",
     "steps": [
       {
-        "when": "2 Wochen vorher",
+        "when": "Vorab",
         "title": "Kickoff, 30 Minuten",
-        "text": "Idee, Nutzer, Daten. Danach sage ich ehrlich, ob 1, 2 oder 3 Tage passen."
+        "text": "Kostenlos und unverbindlich. Wir sprechen über deinen Ablauf, die Menschen, die damit arbeiten, und die Daten. Danach sage ich ehrlich, ob 1, 2 oder 3 Tage passen."
       },
       {
-        "when": "3 Tage vorher",
-        "title": "Deine Accounts",
-        "text": "GitHub, EU-Server, Domain, Claude. Mit Anleitung, rund eine Stunde."
+        "when": "Nach dem Kickoff",
+        "title": "Vorbereitung",
+        "text": "Du legst Accounts bei GitHub, einem EU-Hoster und Claude an und prüfst deinen Rechner. Rund eine Stunde, am besten gleich, damit Zeit für deine IT bleibt.",
+        "link": {
+          "href": "vorbereitung/",
+          "label": "Zur Anleitung"
+        }
       },
       {
-        "when": "Tag 1",
-        "title": "Einfach anfangen",
-        "text": "Ich baue, du entscheidest. Abends läuft der erste Ablauf komplett, live auf deiner Domain."
-      },
-      {
-        "when": "Tag 2–3",
-        "title": "Du übernimmst",
-        "text": "Feinschliff oder der nächste Ablauf, und du machst immer mehr davon selbst."
+        "when": "1 bis 3 Tage",
+        "title": "Workshop",
+        "text": "Von 8 bis 17 Uhr, mit einer Stunde Pause. Am Abend von Tag 1 läuft der erste Ablauf live auf deiner Domain. Danach übernimmst du immer mehr selbst.",
+        "highlight": true
       },
       {
         "when": "Danach",
@@ -85,19 +87,28 @@
     "deliverables": [
       "Eine WebApp für dein Team: mit Login, im Browser und auf dem Handy, auf deinem eigenen Server in der EU (zum Beispiel Hetzner).",
       "Oder eine Mac-App für einzelne Arbeitsplätze und lokale Dateien, selbst signiert, ohne Serverkosten.",
-      "Der Quellcode gehört dir. Dazu die Software Factory, mit der du ohne mich weiterbaust."
+      "In beiden Fällen gehört dir der Quellcode. Dazu die [Software Factory](https://github.com/donePM/software-factory), mit der du ohne mich weiterbaust."
     ],
     "notIncluded": "Apps für deine Kunden und SaaS-Produkte. Die brauchen Sicherheitsprüfung, Support und Betrieb, das passt nicht in 1 bis 3 Tage.",
-    "kickoff": "Kostenloses Kickoff-Gespräch, 30 Minuten, unverbindlich. Anfrage per E-Mail an post@robert-kummer.de."
+    "kickoff": "Kostenloses Kickoff-Gespräch, 30 Minuten, unverbindlich. Termin online buchen oder per E-Mail an post@robert-kummer.de anfragen.",
+    "bookingUrl": "https://cal.eu/robert-kummer/kickoff"
   },
   "faq": [
     {
       "q": "Muss ich die ganze Zeit dabei sein?",
-      "a": "Ja, das ist der Kern des Workshops. Wir kommen so schnell voran, dass ich ständig deine Entscheidungen und dein Fachwissen brauche. Plane die gebuchten Tage voll ein, ohne Termine nebenher. Gern mit einer zweiten Person, die den Ablauf aus dem Alltag kennt."
+      "a": "Ja, das ist der Kern des Workshops. Wir kommen so schnell voran, dass ich ständig deine Entscheidungen und dein Fachwissen brauche. Ein Workshop-Tag geht von 8 bis 17 Uhr, mit einer Stunde Mittagspause. Plane die gebuchten Tage voll ein, ohne Termine nebenher. Gern mit einer zweiten Person, die den Ablauf aus dem Alltag kennt."
     },
     {
       "q": "Was, wenn wir an einem Tag nicht fertig werden?",
       "a": "Darum starten wir mit einem einfachen Thema und lösen es komplett. Am Abend von Tag 1 läuft der Kernprozess einmal durch. Den Rest machen wir an Tag 2 oder 3, oder du baust ihn später selbst."
+    },
+    {
+      "q": "Warum „Produktiv in 12 Stunden“, wenn 2 Tage empfohlen sind?",
+      "a": "Nach 12 Stunden läuft dein Ablauf. Die 12 Stunden verteilen sich auf zwei Tage: 8 an Tag 1 und 4 am Vormittag von Tag 2. Kein Workshop-Tag dauert länger als 8 Stunden plus Pause. Das passt in einen normalen Arbeitstag, auch für Angestellte. Am Nachmittag von Tag 2 übergebe ich dir die Software Factory. Wir besprechen sie, dokumentieren alles und klären den Betrieb. Danach hast du ein Team aus KI-Entwicklern, das für dich weiterbaut, auch ohne technisches Vorwissen. Diese Übergabe ist der eigentliche Mehrwert: Du bist danach nicht auf mich angewiesen."
+    },
+    {
+      "q": "Und wenn ich gar nicht selbst weiterbauen will?",
+      "a": "Dann nutzen wir die Zeit der Übergabe, um deinen Ablauf weiter fertigzustellen. Die Idee des Workshops ist aber Hilfe zur Selbsthilfe: Du sollst Änderungen später selbst umsetzen können, ohne für jede Kleinigkeit jemanden zu beauftragen."
     },
     {
       "q": "Und wenn ich später doch Hilfe brauche?",
@@ -113,7 +124,7 @@
     },
     {
       "q": "Wo liegen unsere Daten?",
-      "a": "In der EU, bei einem europäischen Anbieter wie Hetzner, nicht bei AWS oder einem anderen US-Hyperscaler. Im Workshop arbeiten wir mit Testdaten, echte Kundendaten gehen nicht durch die KI."
+      "a": "Bei dir. Zum Testen liegen sie im Workshop kurz lokal auf dem Rechner, nicht auf einem Testsystem im Netz. Wenn alles läuft, geht die App live auf deinen Server, und dort sind deine echten Daten angebunden."
     },
     {
       "q": "Brauchen wir Programmierer im Team?",
@@ -131,5 +142,13 @@
       "q": "Remote oder vor Ort?",
       "a": "Beides. Remote kostet nichts extra. Vor Ort kommen Reisekosten nach Aufwand dazu."
     }
-  ]
+  ],
+  "testimonials": {
+    "instaposter": {
+      "short": "Probetext kurz: Nach einer Hochzeit sind die Beiträge jetzt in einer Stunde fertig statt an einem ganzen Abend.",
+      "full": "",
+      "name": "Michelle Fiedler",
+      "role": "Hochzeitsfotografin"
+    }
+  }
 }

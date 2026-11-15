@@ -26,7 +26,7 @@ Werkzeuge, Software und Dienste, die ich jeden Tag nutze. Keine Werbung, keine P
 - **[Hetzner](https://www.hetzner.com/)** für Server in der EU, auch in den Workshops
 - **[Mittwald](https://www.mittwald.de/)** für diese Website
 - **[Laravel Cloud](https://cloud.laravel.com/)** für Laravel-Anwendungen
-- **AWS** als Hosting-Umgebung in meinem Job als Lead Developer
+- **AWS** als Hosting-Umgebung in meinem Job als <span lang="en">Lead Software Engineer</span>
 
 ## Diese Website
 

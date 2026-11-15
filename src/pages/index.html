@@ -1,7 +1,7 @@
 ---
 title: Robert Kummer IT – Produktiv in 12 Stunden
 nav_title: Startseite
-description: Ein Workshop für Selbstständige und Unternehmen bis 50 Mitarbeitende: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.
+description: Ein Workshop für Selbstständige und Unternehmen bis 50 Beschäftigte: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.
 path: /
 markdown: index.md
 llms_section: Seiten
@@ -11,32 +11,57 @@ priority: 1.0
 <section id="top" class="section h-product" aria-labelledby="angebot">
   <div class="wrap hero">
     <div class="hero-text">
-      <p class="eyebrow"><span class="p-category">Workshop</span> für Selbstständige und Unternehmen bis 50 Mitarbeitende</p>
+      <p class="eyebrow"><span class="p-category">Workshop</span> für Selbstständige und Unternehmen bis 50 Beschäftigte</p>
       <h1 id="angebot" class="display p-name">Produktiv in 12&#160;Stunden<span class="dot" aria-hidden="true">.</span></h1>
-      <p class="lead e-content">Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir setzen uns zusammen und bauen eine App dafür: du mit deinem Fachwissen, ich mit der Technik. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.</p>
+      <p class="lead e-content">Du bringst einen Ablauf mit, der dich oder dein Team jede Woche Zeit kostet. Wir setzen uns zusammen und bauen eine App dafür: du mit deinem Fachwissen, ich mit der Technik. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.</p>
       <data class="p-price" value="1000 EUR"></data>
       <data class="p-brand" value="Robert Kummer IT"></data>
       <data class="u-url" value="{{site.url}}"></data>
       <div class="actions">
-        <a class="btn btn-primary" href="{{kickoff_href}}">Kostenloses Kickoff-Gespräch anfragen
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <span class="meta">30 Minuten · unverbindlich</span>
+        <div class="split-btn" role="group" aria-label="Kostenloses Kickoff-Gespräch">
+          <a class="btn btn-primary" href="{{kickoff_href}}">Kickoff-Termin buchen
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button type="button" class="btn btn-primary split-btn-toggle" id="kickoff-toggle-hero" popovertarget="kickoff-menu-hero" aria-label="Weitere Wege zum Kickoff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="split-menu" id="kickoff-menu-hero" popover><a href="{{kickoff_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen</a></div>
+        </div>
+        <span class="meta">30 Minuten · kostenlos · unverbindlich</span>
       </div>
     </div>
 
-    <figure class="panel log" aria-labelledby="log-caption">
-      <figcaption id="log-caption" class="log-head">
-        <span><span lang="en">git log</span> · Tag 1</span><span>Beispiel für den ersten Workshop-Tag</span>
-      </figcaption>
-      <ol class="log-list">
-        <li><time datetime="08:00">08:00</time><span>Ablauf auf dem Whiteboard</span></li>
-        <li><time datetime="10:00">10:00</time><span>Repo, Pipeline und Domain stehen</span></li>
-        <li><time datetime="13:00">13:00</time><span>Erster Prozessschritt läuft</span></li>
-        <li><time datetime="17:00">17:00</time><span>Mit echten Daten getestet</span></li>
-        <li class="is-live"><time datetime="20:00">20:00</time><span>live · dein Team arbeitet damit</span></li>
-      </ol>
-    </figure>
+    <div class="panel log carousel" role="region" aria-roledescription="Karussell" aria-label="Beispiel für zwei Workshop-Tage">
+      <div class="log-head">
+        <p>Beispiel-Ablauf</p>
+        <div class="carousel-controls" hidden>
+          <button type="button" class="carousel-btn" data-carousel="prev" aria-label="Vorheriger Tag">←</button>
+          <p class="carousel-status" aria-live="polite">Tag <span data-carousel="current">1</span> von 2</p>
+          <button type="button" class="carousel-btn" data-carousel="next" aria-label="Nächster Tag">→</button>
+        </div>
+      </div>
+      <ul class="carousel-track" role="list" tabindex="0" aria-label="Workshop-Tage, waagerecht scrollbar">
+      <li class="slide" aria-roledescription="Folie" aria-label="Tag 1 von 2">
+        <p class="log-day">Tag 1</p>
+        <ol class="log-list">
+          <li><time datetime="08:00">08:00</time><span>Wir gehen ins Detail und legen den ersten Schritt fest</span></li>
+          <li><time datetime="10:00">10:00</time><span>Die App ist online, der erste Schritt ist schon zu sehen</span></li>
+          <li><time datetime="12:00">12:00</time><span>Mittagspause: Der erste Schritt läuft, die KI baut schon an den nächsten</span></li>
+          <li><time datetime="13:00">13:00</time><span>Erste Verbesserungen: Wir machen Oberfläche und Ablauf einfacher</span></li>
+          <li class="is-live"><time datetime="17:00">17:00</time><span>Der ganze Ablauf steht, wir testen in der App mit echten Daten</span></li>
+        </ol>
+      </li>
+      <li class="slide" aria-roledescription="Folie" aria-label="Tag 2 von 2">
+        <p class="log-day">Tag 2</p>
+        <ol class="log-list">
+          <li><time datetime="08:00">08:00</time><span>Feinschliff, weitere Schritte und Sonderfälle</span></li>
+          <li><time datetime="10:00">10:00</time><span>Wer darf was: Rechte für dich und dein Team</span></li>
+          <li><time datetime="12:00">12:00</time><span>Mittagspause: Die App steht</span></li>
+          <li><time datetime="13:00">13:00</time><span>Ich zeige dir die Software Factory</span></li>
+          <li><time datetime="15:00">15:00</time><span>Wir dokumentieren alles und klären den Betrieb</span></li>
+          <li class="is-live"><time datetime="17:00">17:00</time><span>Übergabe: Du baust selbst weiter</span></li>
+        </ol>
+      </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -53,7 +78,7 @@ priority: 1.0
     <div class="grow">
       <h2 id="robert-titel" class="h-section">Hi, ich bin Robert.</h2>
       <p class="body-lg">19 Jahre lang habe ich eine <abbr title="Informationstechnik">IT</abbr>-Projektagentur geführt. Ich kenne interne Abläufe aus meiner eigenen Firma und aus vielen Beratungsprojekten bei Kunden: wo es hakt, wo kopiert wird, wo eine Person alles im Kopf hat.</p>
-      <p class="body-lg">Heute bin ich <span lang="en">Lead Developer</span>. Mit <abbr title="Künstlicher Intelligenz">KI</abbr> baue ich in Stunden, wofür früher Wochen nötig waren. Genau das mache ich mit dir, an einem Wochenende, an deinem Ablauf.</p>
+      <p class="body-lg">Heute bin ich <span lang="en">Lead Software Engineer</span>. Mit <abbr title="Künstlicher Intelligenz">KI</abbr> baue ich in Stunden, wofür früher Wochen nötig waren. Genau das mache ich mit dir, an einem Wochenende, an deinem Ablauf.</p>
       <dl class="facts">
         <div><dt>Agentur geführt</dt><dd>2001–2020</dd></div>
         <div><dt><abbr title="PHP: Hypertext Preprocessor, eine Programmiersprache">PHP</abbr> seit</dt><dd>2001</dd></div>
@@ -73,22 +98,32 @@ priority: 1.0
       <li class="card">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 14.3c.6-.2 1.3-.3 2-.3 3.3 0 6 2.7 6 6"/></svg>
         <h3>Wir sitzen die ganze Zeit zusammen</h3>
-        <p>Wir kommen so schnell voran, dass ständig Fragen entstehen: Wie läuft das bei euch? Was passiert im Sonderfall? Dafür brauche ich deine Entscheidungen und dein Fachwissen, die ganze gebuchte Zeit.</p>
+        <p>Wir kommen so schnell voran, dass ständig Fragen entstehen: Wie läuft das bei euch? Was passiert im Sonderfall? Dafür brauche ich deine Entscheidungen und dein Fachwissen, die ganze Zeit.</p>
       </li>
       <li class="card">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-        <h3>Klein anfangen, ganz lösen</h3>
+        <h3>Klein anfangen und das Thema ganz lösen</h3>
         <p>Wir starten mit einem einfachen Thema und lösen es vollständig, bis es live läuft. Lieber ein Ablauf, der wirklich funktioniert, als fünf halbe.</p>
       </li>
       <li class="card">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M3 7l9-4 9 4-9 4z"/><path d="M7 9v5c0 1.7 2.2 3 5 3s5-1.3 5-3V9M21 7v6"/></svg>
         <h3>Du lernst bei jedem Schritt mit</h3>
-        <p>Ich erkläre, was passiert und warum. Ab Tag 2 übernimmst du immer mehr selbst. Hilfe zur Selbsthilfe.</p>
+        <p>Ich erkläre, was passiert und warum. Ab Tag 2 übernimmst du immer mehr selbst. Am Ende baust du allein weiter. Hilfe zur Selbsthilfe.</p>
       </li>
     </ul>
     <div class="goal">
       <p class="eyebrow eyebrow-accent">Das Ziel</p>
       <p class="goal-text">Nach zwei Tagen kannst du selbst weiterbauen. Wenn du später Unterstützung willst, bin ich da. Brauchen solltest du mich nicht mehr.</p>
+    </div>
+    <div class="goal goal-muted">
+      <p class="eyebrow">Voraussetzungen</p>
+      <div class="goal-text">
+        <ul class="goal-list" role="list">
+          <li>Du arbeitest mit einem Mac oder mit Linux. Windows geht auch, wenn <abbr title="Windows-Subsystem für Linux, Version 2">WSL2</abbr> und Docker darauf laufen.</li>
+          <li>Du hast schon Zugriff auf die Daten, die dein Ablauf braucht: Exporte, Postfach, <abbr title="Programmierschnittstelle (Application Programming Interface)">API</abbr>-Zugang oder Dateien.</li>
+        </ul>
+        <p>Ob dein Rechner bereit ist, kannst du mit <a href="{{base}}vorbereitung/">dieser Anleitung</a> schon vorab selbst prüfen. Was offen bleibt, klären wir vor dem Workshop gemeinsam.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -97,7 +132,6 @@ priority: 1.0
 <section id="ablauf" class="section" aria-labelledby="ablauf-titel">
   <div class="wrap">
     <h2 id="ablauf-titel" class="h-section">So arbeiten wir zusammen</h2>
-    <p class="body narrow-text">Eine Bedingung: Du hast schon Zugriff auf die Daten, die dein Ablauf braucht. Exporte, Postfach, <abbr title="Programmierschnittstelle (Application Programming Interface)">API</abbr>-Zugang oder Dateien.</p>
     {{steps_html}}
   </div>
 </section>
@@ -106,23 +140,33 @@ priority: 1.0
 <section class="section" aria-labelledby="ergebnis">
   <div class="wrap">
     <h2 id="ergebnis" class="h-section">Was du am Ende hast</h2>
-    <ul class="cards" role="list">
-      <li class="card">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg>
-        <h3>Eine WebApp für dein Team</h3>
-        <p>Mit Login, im Browser und auf dem Handy. Läuft auf deinem eigenen Server in der <abbr title="Europäischen Union">EU</abbr>, zum Beispiel bei Hetzner.</p>
-      </li>
-      <li class="card">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        <h3>Oder eine Mac-App</h3>
-        <p>Für einzelne Arbeitsplätze und lokale Dateien. Selbst signiert, ohne Serverkosten.</p>
-      </li>
-      <li class="card">
+    <div class="deliver">
+      <div class="deliver-choice">
+        <div class="deliver-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg>
+          <div>
+            <h3>Eine WebApp für dein Team</h3>
+            <p>Mit Login, im Browser und auf dem Handy. Läuft auf deinem eigenen Server in der <abbr title="Europäischen Union">EU</abbr>, zum Beispiel bei Hetzner.</p>
+          </div>
+        </div>
+        <p class="deliver-sep">oder</p>
+        <div class="deliver-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <div>
+            <h3>Eine Mac-App</h3>
+            <p>Für einzelne Arbeitsplätze und lokale Dateien. Selbst signiert, ohne Serverkosten.</p>
+          </div>
+        </div>
+      </div>
+      <p class="deliver-sep deliver-plus"><span aria-hidden="true">+</span><span class="sr-only">und dazu</span></p>
+      <div class="deliver-item">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg>
-        <h3>Code und Werkbank</h3>
-        <p>Der Quellcode gehört dir. Dazu die <span lang="en">Software Factory</span>, mit der du ohne mich weiterbaust.</p>
-      </li>
-    </ul>
+        <div>
+          <h3>Code und Werkbank</h3>
+          <p>Der Quellcode gehört dir. Dazu die <a href="#software-factory" lang="en">Software Factory</a>, mit der du ohne mich weiterbaust.</p>
+        </div>
+      </div>
+    </div>
     <p class="note"><strong>Bewusst nicht:</strong> Apps für deine Kunden und <abbr title="Software as a Service, Software zur Miete im Internet">SaaS</abbr>-Produkte. Die brauchen Sicherheitsprüfung, Support und Betrieb, das passt nicht in 1 bis 3 Tage.</p>
   </div>
 </section>
@@ -132,98 +176,134 @@ priority: 1.0
   <div class="wrap split">
     <div class="grow">
       <h2 id="preis-titel" class="h-section">1.000&#160;€ pro Tag.</h2>
+      <p class="body-md strong">Ein Tag sind 8&#160;Stunden, dazu kommt eine Stunde Pause.</p>
       <p class="body-md">Am liebsten Freitag bis Sonntag: Kein Tagesgeschäft, keine Unterbrechungen, volle Konzentration auf deinen Ablauf. Unter der Woche kostet jeder Tag 500&#160;€ mehr.</p>
-      <p class="body-md strong"><span class="accent-text">Empfohlen sind 2 Tage:</span> genug Zeit, um dein Thema zu lösen und dir das Weiterbauen beizubringen. Kleine Aufgaben schaffen wir auch an einem Tag.</p>
-      <p class="meta">Remote ohne Aufpreis · vor Ort zzgl. Reisekosten<br>Gemäß § 19 <abbr title="Umsatzsteuergesetz">UStG</abbr> wird keine Umsatzsteuer berechnet.</p>
+      <p class="body-md strong"><span class="accent-text">Empfohlen sind 2 Tage:</span> 12&#160;Stunden für deinen Ablauf, verteilt auf beide Tage. Danach übergebe ich dir die <span lang="en">Software Factory</span>, damit du selbst weiterbaust. Kleine Aufgaben schaffen wir auch an einem Tag.</p>
+      <p class="meta">Remote ohne Aufpreis · vor Ort zzgl. Reisekosten</p>
     </div>
 
+    <div class="calc-wrap">
     <form id="price-form" class="panel calc" aria-labelledby="calc-titel"
           toolname="calculate_workshop_price"
-          tooldescription="Berechnet den Preis für den Workshop „Produktiv in 12 Stunden“ nach Dauer (1 bis 3 Tage), Zeitpunkt (weekend oder weekday) und Ort (remote oder onsite). Preise in Euro, keine Umsatzsteuer nach § 19 UStG."
+          tooldescription="Berechnet den Preis für den Workshop „Produktiv in 12 Stunden“ nach Dauer (1 bis 3 Tage zu je 8 Stunden), Zeitpunkt (weekend oder weekday) und Ort (remote oder onsite). Preise in Euro, keine Umsatzsteuer nach § 19 UStG."
           toolautosubmit
           data-webmcp-form>
       <h3 id="calc-titel" class="calc-title">Preisrechner</h3>
-      <fieldset class="seg seg-3" aria-describedby="dayHint">
+      <fieldset class="seg seg-3" aria-describedby="dayHint" toolparamdescription="Anzahl der Workshop-Tage: 1, 2 oder 3">
         <legend>Dauer</legend>
-        <label><input type="radio" name="days" value="1" toolparamdescription="Anzahl der Workshop-Tage: 1, 2 oder 3"><span>1 Tag</span></label>
-        <label><input type="radio" name="days" value="2" checked toolparamdescription="Anzahl der Workshop-Tage: 1, 2 oder 3"><span>2 Tage</span></label>
-        <label><input type="radio" name="days" value="3" toolparamdescription="Anzahl der Workshop-Tage: 1, 2 oder 3"><span>3 Tage</span></label>
+        <label><input type="radio" name="days" value="1"><span>1 Tag</span></label>
+        <label><input type="radio" name="days" value="2" checked><span>2 Tage</span></label>
+        <label><input type="radio" name="days" value="3"><span>3 Tage</span></label>
       </fieldset>
       <p id="dayHint" class="meta hint">2 Tage, empfohlen: Thema gelöst, und du baust danach selbst weiter.</p>
-      <fieldset class="seg seg-2">
+      <fieldset class="seg seg-2" toolparamdescription="weekend = Freitag bis Sonntag, weekday = Montag bis Donnerstag (500 € Aufschlag pro Tag)">
         <legend>Wann</legend>
-        <label><input type="radio" name="timing" value="weekend" checked toolparamdescription="weekend = Freitag bis Sonntag, weekday = Montag bis Donnerstag (500 € Aufschlag pro Tag)"><span>Fr–So</span></label>
-        <label><input type="radio" name="timing" value="weekday" toolparamdescription="weekend = Freitag bis Sonntag, weekday = Montag bis Donnerstag (500 € Aufschlag pro Tag)"><span>Mo–Do</span></label>
+        <label><input type="radio" name="timing" value="weekday"><span>Mo–Do</span></label>
+        <label><input type="radio" name="timing" value="weekend" checked><span>Fr–So</span></label>
       </fieldset>
-      <fieldset class="seg seg-2">
+      <fieldset class="seg seg-2" toolparamdescription="remote = online ohne Aufpreis, onsite = vor Ort zuzüglich Reisekosten">
         <legend>Wo</legend>
-        <label><input type="radio" name="location" value="remote" checked toolparamdescription="remote = online ohne Aufpreis, onsite = vor Ort zuzüglich Reisekosten"><span>Remote</span></label>
-        <label><input type="radio" name="location" value="onsite" toolparamdescription="remote = online ohne Aufpreis, onsite = vor Ort zuzüglich Reisekosten"><span>Vor Ort</span></label>
+        <label><input type="radio" name="location" value="remote" checked><span>Remote</span></label>
+        <label><input type="radio" name="location" value="onsite"><span>Vor Ort</span></label>
       </fieldset>
       <div class="calc-result">
         <div aria-live="polite" aria-atomic="true">
           <p class="total"><span class="sr-only">Gesamtpreis: </span><span id="total">2.000 €</span></p>
-          <p id="breakdown" class="meta">2 × 1.000 € · remote</p>
+          <p id="breakdown" class="meta">2 × 1.000 € · 16 Stunden · remote</p>
         </div>
-        <a class="btn btn-primary" href="{{kickoff_href}}">Workshop-Termin anfragen</a>
+        <div class="split-btn" role="group" aria-label="Workshop-Termin anfragen">
+          <a class="btn btn-primary" href="{{kickoff_href}}">Workshop-Termin anfragen</a>
+          <button type="button" class="btn btn-primary split-btn-toggle" id="kickoff-toggle-calc" popovertarget="kickoff-menu-calc" aria-label="Weitere Wege zur Anfrage"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="split-menu" id="kickoff-menu-calc" popover><a id="calc-mail" href="{{workshop_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen, mit dieser Auswahl</a></div>
+        </div>
       </div>
     </form>
+    <p class="calc-note">Ich bin Kleinunternehmer nach §&#160;19 <abbr title="Umsatzsteuergesetz">UStG</abbr>. Alle Preise sind Endpreise: Es kommt keine Umsatzsteuer dazu, und auf der Rechnung wird keine ausgewiesen.</p>
+    </div>
   </div>
 </section>
 
-<!-- Referenz -->
-<section id="referenz" class="section" aria-labelledby="referenz-titel">
+<!-- Referenzen -->
+<section id="referenzen" class="section" aria-labelledby="referenzen-titel">
   <div class="wrap">
-    <h2 id="referenz-titel" class="eyebrow">Referenz · zwei Apps für eine Hochzeitsfotografin</h2>
-    <figure class="quote">
-      <blockquote><p>„[REZENSION VON MICHELLE FIEDLER, IN IHREN WORTEN]“</p></blockquote>
-      <figcaption>
-        <span class="quote-name">Michelle Fiedler</span>
-        <span class="quote-role">Hochzeitsfotografin</span>
-        <a class="meta" href="https://www.weddingsandotherstories.com/" lang="en">weddingsandotherstories.com</a>
-      </figcaption>
-    </figure>
+    <h2 id="referenzen-titel" class="eyebrow">Referenzen · Abläufe und Apps</h2>
 
-    <div class="carousel" role="region" aria-roledescription="Karussell" aria-label="Apps für Michelle Fiedler">
+    <div class="carousel" role="region" aria-roledescription="Karussell" aria-label="Referenzen">
       <div class="carousel-controls" hidden>
-        <button type="button" class="carousel-btn" data-carousel="prev" aria-label="Vorherige App">←</button>
+        <button type="button" class="carousel-btn" data-carousel="prev" aria-label="Vorherige Referenz">←</button>
         <p class="meta carousel-status" aria-live="polite"><span data-carousel="current">1</span> von 2</p>
-        <button type="button" class="carousel-btn" data-carousel="next" aria-label="Nächste App">→</button>
+        <button type="button" class="carousel-btn" data-carousel="next" aria-label="Nächste Referenz">→</button>
       </div>
-      <ul class="carousel-track" role="list" tabindex="0" aria-label="Apps, waagerecht scrollbar">
-        <li class="slide" id="app-stories" aria-roledescription="Folie" aria-label="1 von 2: Story-Planer">
+      <ul class="carousel-track" role="list" tabindex="0" aria-label="Referenzen, waagerecht scrollbar">
+        <li class="slide" id="app-instaposter" aria-roledescription="Folie" aria-label="1 von 2: InstaPoster">
           <div class="split split-stretch">
             <div class="grow">
-              <h3 class="h-slide">Story-Planer</h3>
-              <p class="meta">Web-App · gebaut in 1,5 Tagen</p>
-              <p class="body-md">Nach jeder Hochzeit hat sie Fotos ausgewählt und Instagram-Stories von Hand geplant. Jetzt führt eine App durch den Ablauf und veröffentlicht mehrere Fotos je Event automatisch zur geplanten Zeit.</p>
+              <p class="slide-client">Für Michelle Fiedler, Hochzeitsfotografin</p>
+              <h3 class="h-slide" lang="en">InstaPoster</h3>
+              <p class="meta">Mac-App · verbindet <span lang="en">Canva</span> und <span lang="en">Postiz</span> · gebaut in 1,5 Tagen</p>
+              <p class="body-md">Aus 1.000 Hochzeitsfotos werden 30 fertig geplante Instagram-Beiträge. Geschätzt spart das rund 8,5 Stunden Arbeit je Hochzeit.</p>
               <ol class="numbered">
-                <li>Hochzeit anlegen</li>
-                <li>Fotos je Event auswählen</li>
-                <li>Veröffentlichung planen</li>
-                <li class="is-accent">Stories gehen automatisch raus</li>
+                <li>Fotos auswählen, die KI sortiert sie offline vor</li>
+                <li>InstaPoster füllt die Canva-Vorlagen</li>
+                <li>Korrektur und Freigabe in Canva</li>
+                <li>InstaPoster plant die Beiträge in Postiz ein</li>
+                <li class="is-accent">Postiz stellt sie zum Termin auf Instagram live</li>
               </ol>
+              {{testimonial.instaposter.short}}
+              <p class="slide-more"><a href="{{base}}referenzen/instaposter/">Ganze Referenz lesen<span class="sr-only">: InstaPoster</span></a></p>
             </div>
-            <div class="placeholder grow">
-              <p class="meta">[SCREENSHOT STORY-PLANER]</p>
+            <div class="gallery grow">
+              <div class="shots" role="group" aria-label="Bilder zu InstaPoster, waagerecht scrollbar" tabindex="0">
+                <figure class="shot">
+                  <button type="button" class="zoom" popovertarget="lb-home-kategorisieren">
+                    <img src="{{base}}assets/img/instaposter-kategorisieren.jpg" width="1616" height="815" loading="lazy" decoding="async" alt="InstaPoster, Ansicht Kategorisieren: Jedes Foto bekommt Kategorien mit Trefferquote, etwa Dekoration 95 %, Party 85 % oder Couple Shoot 95 %, dazu eine kurze Begründung."><span class="sr-only"> (vergrößern)</span>
+                  </button>
+                  <figcaption class="meta">Kategorisieren, Fotos und Dateinamen unkenntlich gemacht</figcaption>
+                </figure>
+                <figure class="shot">
+                  <button type="button" class="zoom zoom-flow" popovertarget="lb-home-ablauf">
+                    {{partials.instaposter_flow}}<span class="sr-only">Ablauf vergrößern</span>
+                  </button>
+                  <figcaption class="meta">Ablauf je Hochzeit, Zeitaufwand geschätzt</figcaption>
+                </figure>
+              </div>
+              <div id="lb-home-kategorisieren" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-kategorisieren" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/instaposter-kategorisieren.jpg" width="1616" height="815" loading="lazy" decoding="async" alt=""></button></div>
+              <div id="lb-home-ablauf" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-ablauf" popovertargetaction="hide" aria-label="Großansicht schließen">{{partials.instaposter_flow_lightbox}}</button></div>
             </div>
           </div>
         </li>
         <li class="slide" id="app-fundus" aria-roledescription="Folie" aria-label="2 von 2: Fundus">
           <div class="split split-stretch">
             <div class="grow">
+              <p class="slide-client">Für mich selbst, als Privatperson</p>
               <h3 class="h-slide">Fundus</h3>
-              <p class="meta">Mac-App · lokal, ohne Cloud</p>
-              <p class="body-md">Fotos, Videos und Dokumente lagen verteilt auf Festplatten und Ordnern. Fundus sammelt alles in einer Bibliothek auf dem eigenen Mac: mit Schlagworten, Alben, Volltextsuche und einem geprüften Backup auf ein zweites Laufwerk.</p>
+              <p class="meta">Mac-App · Dateien bleiben auf dem eigenen Mac · erste Fassung im Workshop-Rahmen</p>
+              <p class="body-md">Fotos und Dateien lagen in Google Fotos, Google Drive und auf Festplatten. Jetzt liegt alles in einer Bibliothek auf dem eigenen Mac, private und gewerbliche Dokumente getrennt, durchsuchbar bis in den Text gescannter Belege. Von Hand einsortieren muss ich nichts mehr: Dokument hineinziehen, und die lokale KI archiviert es an der richtigen Stelle.</p>
               <ol class="numbered">
-                <li>Dateien importieren</li>
-                <li>Schlagworte und Alben vergeben</li>
-                <li>Suchen und filtern</li>
-                <li class="is-accent">Backup läuft automatisch</li>
+                <li>Google-Export und Dateien in die Inbox legen</li>
+                <li>Lokale KI und Texterkennung ordnen jede Datei automatisch ein</li>
+                <li>Suchen, filtern, in Alben sammeln</li>
+                <li class="is-accent">Backup läuft automatisch und wird geprüft</li>
               </ol>
+              <p class="slide-more"><a href="{{base}}referenzen/fundus/">Ganze Referenz lesen<span class="sr-only">: Fundus</span></a></p>
             </div>
-            <div class="placeholder grow">
-              <p class="meta">[SCREENSHOT FUNDUS]</p>
+            <div class="gallery grow">
+              <div class="shots" role="group" aria-label="Bilder zu Fundus, waagerecht scrollbar" tabindex="0">
+                <figure class="shot">
+                  <button type="button" class="zoom" popovertarget="lb-home-fundus-zeit">
+                    <img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Zeitleiste: oben eine Reihe „An diesem Tag“ mit Fotos von vor vier Jahren, darunter je Jahr eine Zeile mit einer Kachel pro Monat und der Zahl der Dateien, insgesamt 29.302 Dateien. Links die Seitenleiste mit Inbox, Karte, Filtern, Fotos, Dokumenten und Schlagworten."><span class="sr-only"> (vergrößern)</span>
+                  </button>
+                  <figcaption class="meta">Zeitleiste, Fotos unkenntlich gemacht</figcaption>
+                </figure>
+                <figure class="shot">
+                  <button type="button" class="zoom" popovertarget="lb-home-fundus-karte">
+                    <img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Karte: Fotos mit GPS erscheinen als Stapel über Europa, etwa in Portugal, Spanien, Italien und Griechenland, jeder Stapel mit der Zahl seiner Fotos."><span class="sr-only"> (vergrößern)</span>
+                  </button>
+                  <figcaption class="meta">Karte, Fotos unkenntlich gemacht</figcaption>
+                </figure>
+              </div>
+              <div id="lb-home-fundus-zeit" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-zeit" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
+              <div id="lb-home-fundus-karte" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-karte" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
             </div>
           </div>
         </li>
@@ -233,11 +313,12 @@ priority: 1.0
 </section>
 
 <!-- Software Factory -->
-<section class="section" aria-labelledby="factory">
+<section id="software-factory" class="section" aria-labelledby="factory">
   <div class="wrap split split-center">
     <div class="grow">
       <h2 id="factory" class="h-section">Die <span lang="en">Software Factory</span></h2>
-      <p class="body-md">Deine Werkbank zum Weiterbauen: Anleitungen für <span lang="en">Claude Code</span>, Tests und automatisches Ausrollen. Sie ist Open Source, du kannst sie dir vorher ansehen.</p>
+      <p class="body-md">Deine Werkbank zum Weiterbauen: ein Team aus KI-Entwicklern, mit Anleitungen für <span lang="en">Claude Code</span>, Tests und automatischem Ausrollen. Du beschreibst, was du brauchst, das Team baut es. Programmieren musst du dafür nicht.</p>
+      <p class="body-md">Die Übergabe gehört fest zum Workshop: Am letzten Nachmittag besprechen wir die <span lang="en">Factory</span> und dokumentieren alles, bis du allein damit zurechtkommst. Sie ist Open Source, du kannst sie dir vorher ansehen.</p>
       <p><a class="link-accent" href="https://github.com/donePM/software-factory">Software Factory auf GitHub ansehen</a></p>
     </div>
     <figure class="terminal grow" aria-labelledby="terminal-caption">
@@ -289,10 +370,14 @@ priority: 1.0
     <h2 id="kickoff-titel" class="display-2">Welcher Ablauf kostet dich gerade am meisten Zeit<span class="dot" aria-hidden="true">?</span></h2>
     <p class="body-lg">Erzähl ihn mir in 30 Minuten. Danach weißt du, ob wir ihn an einem Wochenende lösen. Kostenlos und unverbindlich.</p>
     <div class="actions">
-      <a class="btn btn-primary btn-lg" href="{{kickoff_href}}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-        Kickoff-Termin per E-Mail anfragen
-      </a>
+      <div class="split-btn" role="group" aria-label="Kostenloses Kickoff-Gespräch">
+        <a class="btn btn-primary btn-lg" href="{{kickoff_href}}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          Kickoff-Termin buchen
+        </a>
+        <button type="button" class="btn btn-primary btn-lg split-btn-toggle" id="kickoff-toggle-cta" popovertarget="kickoff-menu-cta" aria-label="Weitere Wege zum Kickoff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="split-menu" id="kickoff-menu-cta" popover><a href="{{kickoff_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen</a></div>
+      </div>
       <a class="link-mono" href="mailto:{{person.email}}">{{person.email}}</a>
     </div>
     <p class="body-lg">Bis bald, Robert</p>
