@@ -5,15 +5,23 @@ Quellcode der Website von Robert Kummer IT.
 ## Aufbau
 
 ```
-public/                       Alles, was auf den Server kommt (wird 1:1 hochgeladen)
-.github/workflows/deploy.yml  Deployment per GitHub Actions
+public/                        Alles, was auf den Server kommt (wird 1:1 hochgeladen)
+public/assets/                 CSS, JavaScript, Schriften (Geist, selbst gehostet), Bilder
+.github/workflows/preview.yml  Vorschau auf GitHub Pages bei jedem Push auf main
+.github/workflows/deploy.yml   Deployment zu Mittwald bei jedem Release
 ```
+
+Die Seite ist reines HTML/CSS/JS ohne Build-Schritt. Lokal reicht es, `public/index.html` im Browser zu öffnen.
+
+## Vorschau
+
+Jeder Push auf `main` aktualisiert die Vorschau unter **https://robert-kummer.github.io/website/**. Die Vorschau bekommt automatisch `noindex` und eine `robots.txt` mit `Disallow: /`, damit Suchmaschinen sie nicht indexieren. Alle Pfade in `public/` sind relativ, deshalb funktioniert die Seite im Unterordner genauso wie auf der Domain.
 
 ## Deployment
 
 Gearbeitet wird nur auf `main`. Live geht die Seite erst mit einem **Release**:
 
-1. Änderungen auf `main` pushen.
+1. Änderungen auf `main` pushen und in der Vorschau prüfen.
 2. Auf GitHub einen Release anlegen (Releases → Draft a new release, Tag z. B. `v1.0.0`) und veröffentlichen.
 3. GitHub Actions lädt den Inhalt von `public/` aus diesem Tag per SFTP zu Mittwald hoch.
 

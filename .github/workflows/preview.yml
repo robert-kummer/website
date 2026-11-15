@@ -1,0 +1,46 @@
+name: Preview
+
+# Jeder Push auf main baut eine Vorschau auf GitHub Pages:
+# https://robert-kummer.github.io/website/
+# Die Vorschau wird für Suchmaschinen gesperrt (noindex + robots.txt).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Vorschau vorbereiten
+        run: |
+          rm -rf _site
+          cp -R public _site
+          find _site -name .gitkeep -delete
+          # Suchmaschinen fernhalten, damit die Vorschau nicht mit robert-kummer.de konkurriert
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          find _site -name '*.html' -exec sed -i 's|<head>|<head>\n  <meta name="robots" content="noindex, nofollow">|' {} +
+          grep -c 'noindex' _site/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
