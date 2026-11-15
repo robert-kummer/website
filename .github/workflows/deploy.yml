@@ -35,6 +35,14 @@ jobs:
           for v in SFTP_HOST SFTP_USER SFTP_PATH SFTP_KNOWN_HOSTS; do
             if [ -z "${!v}" ]; then echo "::error::Variable $v fehlt"; missing=1; fi
           done
+          # lftp übernimmt Anführungszeichen wörtlich, deshalb werden die Werte unquotiert übergeben und dürfen keine Leerzeichen enthalten
+          for v in SFTP_HOST SFTP_USER SFTP_PATH; do
+            case "${!v}" in *[[:space:]]*|*\"*|*\'*) echo "::error::Variable $v enthält Leerzeichen oder Anführungszeichen"; missing=1;; esac
+          done
+          # mirror --delete löscht im Ziel alles, was nicht in dist/ liegt: nie die Wurzel
+          if [ "$SFTP_PATH" = "/" ] || [ "$SFTP_PATH" = "." ] || [ "$SFTP_PATH" = "~" ]; then
+            echo "::error::SFTP_PATH darf nicht die Wurzel sein, sondern muss auf den ausgelieferten Ordner zeigen (z. B. /public/)"; missing=1
+          fi
           if [ "$HAS_KEY" != "true" ] && [ "$HAS_PASSWORD" != "true" ]; then
             echo "::error::Secret SFTP_PRIVATE_KEY oder SFTP_PASSWORD fehlt"; missing=1
           fi
@@ -82,16 +90,16 @@ jobs:
           LFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
         run: |
           if [ -f ~/.ssh/deploy_key ]; then
-            open_cmd="open -u \"$SFTP_USER\", sftp://$SFTP_HOST:$SFTP_PORT"
+            open_cmd="open -u $SFTP_USER, sftp://$SFTP_HOST:$SFTP_PORT"
           else
-            open_cmd="open --env-password -u \"$SFTP_USER\" sftp://$SFTP_HOST:$SFTP_PORT"
+            open_cmd="open --env-password -u $SFTP_USER sftp://$SFTP_HOST:$SFTP_PORT"
           fi
           lftp -e "
             set cmd:fail-exit yes;
             set net:max-retries 2;
             set net:timeout 30;
             $open_cmd;
-            mirror --reverse --delete --verbose --parallel=4 dist/ \"$SFTP_PATH\";
+            mirror --reverse --delete --verbose --parallel=4 dist/ $SFTP_PATH;
             bye
           "
 
