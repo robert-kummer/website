@@ -60,10 +60,18 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s\n' "$SFTP_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
+          # SSH-Optionen über die Config statt sftp:connect-program (lftp übernimmt dort Anführungszeichen wörtlich)
+          {
+            echo "Host *"
+            echo "  StrictHostKeyChecking yes"
+            echo "  UserKnownHostsFile $HOME/.ssh/known_hosts"
+          } > ~/.ssh/config
           if [ -n "$SFTP_PRIVATE_KEY" ]; then
             printf '%s\n' "$SFTP_PRIVATE_KEY" > ~/.ssh/deploy_key
             chmod 600 ~/.ssh/deploy_key
+            printf '  IdentitiesOnly yes\n  IdentityFile %s\n' "$HOME/.ssh/deploy_key" >> ~/.ssh/config
           fi
+          chmod 600 ~/.ssh/config
 
       - name: Per SFTP hochladen
         env:
@@ -73,9 +81,7 @@ jobs:
           SFTP_PATH: ${{ vars.SFTP_PATH }}
           LFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
         run: |
-          ssh_cmd="ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
           if [ -f ~/.ssh/deploy_key ]; then
-            ssh_cmd="$ssh_cmd -o IdentitiesOnly=yes -i $HOME/.ssh/deploy_key"
             open_cmd="open -u \"$SFTP_USER\", sftp://$SFTP_HOST:$SFTP_PORT"
           else
             open_cmd="open --env-password -u \"$SFTP_USER\" sftp://$SFTP_HOST:$SFTP_PORT"
@@ -84,7 +90,6 @@ jobs:
             set cmd:fail-exit yes;
             set net:max-retries 2;
             set net:timeout 30;
-            set sftp:connect-program \"$ssh_cmd\";
             $open_cmd;
             mirror --reverse --delete --verbose --parallel=4 dist/ \"$SFTP_PATH\";
             bye
