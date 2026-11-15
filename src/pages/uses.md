@@ -14,17 +14,19 @@ Werkzeuge, Software und Dienste, die ich jeden Tag nutze. Keine Werbung, keine P
 
 ## Entwicklung
 
-- **PhpStorm** als Editor
+- **[JetBrains-IDEs](https://www.jetbrains.com/)** für die Entwicklung
 - **[Claude Code](https://claude.com/claude-code)** als KI-Werkzeug im Terminal
-- **[rtk](https://github.com/rtk-ai/rtk)** spart Tokens bei Kommandozeilen-Ausgaben
 - **PHP und Laravel** für fast alles, was im Browser läuft
 - **Git und GitHub** für Code, Reviews und automatisches Ausrollen mit GitHub Actions
-- [ERGÄNZEN: Terminal, Shell, Datenbank-Werkzeuge]
+- **[Ghostty](https://ghostty.org/)** als Terminal
+- **[DataGrip](https://www.jetbrains.com/datagrip/)** für Datenbanken
 
 ## Hosting
 
 - **[Hetzner](https://www.hetzner.com/)** für Server in der EU, auch in den Workshops
 - **[Mittwald](https://www.mittwald.de/)** für diese Website
+- **[Laravel Cloud](https://cloud.laravel.com/)** für Laravel-Anwendungen
+- **AWS** als Hosting-Umgebung in meinem Job als Lead Developer
 
 ## Diese Website
 
@@ -35,4 +37,7 @@ Werkzeuge, Software und Dienste, die ich jeden Tag nutze. Keine Werbung, keine P
 
 ## Hardware
 
-- [ERGÄNZEN: Rechner, Monitor, Tastatur, Kamera und Mikrofon für Remote-Workshops]
+- **Mac mini** mit zwei 24-Zoll-Monitoren
+- **Røde-Mikrofon** für die Stimme in Remote-Workshops
+- **Logitech Brio 4K** als Webcam
+- **Logitech MX Master** als Tastatur und Maus
