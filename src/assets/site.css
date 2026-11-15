@@ -214,8 +214,20 @@
     text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-text);
   }
   .deliver-plus { display: flex; justify-content: center; margin: 10px 0; font-size: 1.75rem; line-height: 1; letter-spacing: 0; }
+  /* Goldene Klammer um das „oder“: nebeneinander links und rechts, untereinander oben und unten,
+     jeweils ein Stück die anschließenden Kanten entlang, weich auslaufend */
+  .deliver-choice {
+    > .deliver-item { position: relative; }
+    > .deliver-item::after { content: ""; position: absolute; inset-block: -1px; width: 48px; pointer-events: none; border: 1px solid var(--accent); }
+    > .deliver-item:first-child::after { left: -1px; border-right: 0; border-radius: var(--radius-card) 0 0 var(--radius-card); mask-image: linear-gradient(to right, #000 40%, transparent); }
+    > .deliver-item:last-child::after { right: -1px; border-left: 0; border-radius: 0 var(--radius-card) var(--radius-card) 0; mask-image: linear-gradient(to left, #000 40%, transparent); }
+  }
   @media (max-width: 760px) {
-    .deliver-choice { grid-template-columns: 1fr; gap: 10px; }
+    .deliver-choice { grid-template-columns: 1fr; gap: 10px;
+      > .deliver-item::after { inset-block: auto; inset-inline: -1px; width: auto; height: 48px; border: 1px solid var(--accent); }
+      > .deliver-item:first-child::after { top: -1px; border-bottom: 0; border-radius: var(--radius-card) var(--radius-card) 0 0; mask-image: linear-gradient(#000 40%, transparent); }
+      > .deliver-item:last-child::after { bottom: -1px; border-top: 0; border-radius: 0 0 var(--radius-card) var(--radius-card); mask-image: linear-gradient(transparent, #000 60%); }
+    }
   }
   .goal {
     margin-top: 16px; border: 1px solid var(--accent); border-radius: var(--radius-card); padding: 26px 30px;
