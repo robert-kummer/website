@@ -102,7 +102,7 @@ const EXECUTORS = {
   get_page_markdown: ({ page } = {}) => safely(async () => {
     const entry = SITE.pages[page];
     if (!entry) throw new Error(`Unbekannte Seite. Erlaubt: ${Object.keys(SITE.pages).join(', ')}`);
-    const response = await fetch(new URL(entry.markdown, location.href), { headers: { Accept: 'text/markdown' } });
+    const response = await fetch(new URL(entry.markdown, new URL('../', import.meta.url)), { headers: { Accept: 'text/markdown' } });
     if (!response.ok) throw new Error(`Abruf fehlgeschlagen (${response.status}).`);
     return { page, url: entry.url, markdown: await response.text() };
   }),

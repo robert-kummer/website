@@ -225,6 +225,8 @@ def tool_definitions(data: dict, page_ids: list[str]) -> list[dict]:
 def build(args: argparse.Namespace) -> Path:
     data = json.loads((SRC / "data" / "site.json").read_text(encoding="utf-8"))
     site, person, offer = data["site"], data["person"], data["offer"]
+    # Seiten verlinken relativ (z. B. ../now/), damit kein Basispfad in den Links steht.
+    # Nur die 404-Seite braucht absolute Pfade, weil sie unter beliebigen Adressen erscheint.
     base = "/" + args.base_path.strip("/") + "/" if args.base_path.strip("/") else "/"
     # Alle absoluten Adressen zeigen auf die Live-Domain, auch in Vorschau und lokal (canonical).
     site_url = site["url"].rstrip("/") + "/"
@@ -252,7 +254,8 @@ def build(args: argparse.Namespace) -> Path:
         rel = path.lstrip("/")
         pages.append({
             "id": page_id, "file": file, "meta": meta, "body": body, "kind": file.suffix[1:],
-            "path": path, "href": base + rel, "url": site_url + rel,
+            "path": path, "url": site_url + rel,
+            "base": (("../" * rel.count("/")) or "./") if path != "/404.html" else base,
             "out": out / (rel + "index.html" if rel.endswith("/") or not rel else rel),
             "md_rel": (rel + "index.md") if (rel.endswith("/") or not rel) else None,
         })
@@ -298,7 +301,7 @@ def build(args: argparse.Namespace) -> Path:
         "offer": {k: v for k, v in offer.items()},
         "offerUrl": site_url,
         "faq": data["faq"],
-        "pages": {p["id"]: {"title": p["meta"]["title"], "url": p["url"], "markdown": base + p["md_rel"]} for p in listed},
+        "pages": {p["id"]: {"title": p["meta"]["title"], "url": p["url"], "markdown": p["md_rel"]} for p in listed},
         "tools": tools,
     }
     js = (SRC / "assets" / "site.js").read_text(encoding="utf-8")
@@ -312,13 +315,13 @@ def build(args: argparse.Namespace) -> Path:
         stem, ext = name.rsplit(".", 1)
         hashed = f"{stem}.{hashlib.sha256(raw).hexdigest()[:10]}.{ext}"
         write(out / "assets" / hashed, raw)
-        assets[name] = (base + "assets/" + hashed, sri(raw))
+        assets[name] = ("assets/" + hashed, sri(raw))
 
     # Speculation Rules und CSP ----------------------------------------------
     speculation = json.dumps({"prerender": [{
         "where": {"and": [
-            {"href_matches": base + "*"},
-            {"not": {"href_matches": [base + "*.md", base + "*.vcf", base + "*.txt", base + "*.xml", base + "*.webmanifest"]}},
+            {"href_matches": "/*"},
+            {"not": {"href_matches": ["/*.md", "/*.vcf", "/*.txt", "/*.xml", "/*.webmanifest"]}},
         ]},
         "eagerness": "moderate",
     }]}, separators=(",", ":"))
@@ -388,15 +391,15 @@ def build(args: argparse.Namespace) -> Path:
         name = page["file"].name
         # Inhalt
         if page["kind"] == "html":
-            content = render(page["body"], ctx, escape=True, source=name)
+            content = render(page["body"], {**ctx, "base": page["base"]}, escape=True, source=name)
             md_source = (SRC / "pages" / meta["markdown"]).read_text(encoding="utf-8") if meta.get("markdown") else None
         else:
-            md_text = render(page["body"], ctx, escape=False, source=name)
+            md_text = render(page["body"], {**ctx, "base": page["base"]}, escape=False, source=name)
             content = ('<section class="section">\n  <div class="wrap">\n    <article class="prose">\n'
                        + markdown_to_html(md_text) + "\n    </article>\n  </div>\n</section>")
             md_source = page["body"]
         if md_source is not None and page["md_rel"]:
-            md_text = render(md_source, ctx, escape=False, source=meta.get("markdown", name)).strip()
+            md_text = render(md_source, {**ctx, "base": site_url}, escape=False, source=meta.get("markdown", name)).strip()
             md_text = re.sub(r'<p class="updated">(.*?)</p>', lambda m: re.sub(r"<[^>]+>", "", m.group(1)), md_text)
             md_text += f"\n\n---\n\nQuelle: <{page['url']}>\n"
             write(out / page["md_rel"], md_text)
@@ -420,17 +423,17 @@ def build(args: argparse.Namespace) -> Path:
             "csp_meta": csp_meta, "origin_trial_meta": origin_trial_meta,
             "title": meta["title"], "description": meta.get("description", site["description"]),
             "robots": robots, "canonical": page["url"],
-            "md_href": base + (page["md_rel"] or "index.md"),
+            "md_href": page["base"] + (page["md_rel"] or "index.md"), "base": page["base"],
             "rel_me_links": rel_me_links, "rel_me_list": rel_me_list,
-            "css_href": assets["site.css"][0], "css_sri": assets["site.css"][1],
-            "js_href": assets["site.js"][0], "js_sri": assets["site.js"][1],
+            "css_href": page["base"] + assets["site.css"][0], "css_sri": assets["site.css"][1],
+            "js_href": page["base"] + assets["site.js"][0], "js_sri": assets["site.js"][1],
             "og_image": site_url + person["photo"],
             "jsonld": Raw(jsonld), "speculation_rules": Raw(speculation),
             "content": Raw("\x00CONTENT\x00"),
         }
         shell = render(layout, page_ctx, escape=True, source="layout.html")
         # aktuelle Seite in der Navigation markieren
-        shell = shell.replace(f'href="{page["href"]}"', f'href="{page["href"]}" aria-current="page"')
+        shell = shell.replace(f'href="{page["base"] + page["path"].lstrip("/")}"', f'href="{page["base"] + page["path"].lstrip("/")}" aria-current="page"')
         write(page["out"], shell.replace("\x00CONTENT\x00", content))
 
     # Statische Dateien ------------------------------------------------------
@@ -503,12 +506,12 @@ def build(args: argparse.Namespace) -> Path:
 
     write(out / "manifest.webmanifest", json.dumps({
         "name": site["name"], "short_name": "Robert Kummer", "description": site["description"],
-        "lang": site["lang"], "dir": "ltr", "start_url": base, "scope": base, "id": base,
+        "lang": site["lang"], "dir": "ltr", "start_url": "./", "scope": "./", "id": "./",
         "display": "minimal-ui", "background_color": site["themeColor"], "theme_color": site["themeColor"],
         "icons": [
-            {"src": base + "icon-192.png", "sizes": "192x192", "type": "image/png"},
-            {"src": base + "icon-512.png", "sizes": "512x512", "type": "image/png"},
-            {"src": base + "favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+            {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+            {"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml"},
         ],
     }, ensure_ascii=False, indent=2) + "\n")
 

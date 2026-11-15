@@ -46,6 +46,8 @@ WebMCP läuft in Chrome derzeit hinter einem Flag oder über einen Origin Trial.
 
 Jeder Push auf `main` aktualisiert die Vorschau unter **https://robert-kummer.github.io/website/**. Der Workflow baut mit `--preview`: alle Seiten bekommen `noindex`, die `robots.txt` sperrt alles, die `.htaccess` entfällt.
 
+Alle Links zwischen den Seiten sind relativ (`../now/`, `index.md`). Deshalb funktioniert dieselbe Ausgabe unter `/website/`, lokal und live, ohne dass ein Basispfad in den Links steht. Nur die 404-Seite verlinkt absolut, weil sie unter beliebigen Adressen erscheint. Absolute Adressen (canonical, JSON-LD, Markdown, `llms.txt`, Sitemap) zeigen immer auf https://robert-kummer.de/.
+
 ## Deployment
 
 Gearbeitet wird nur auf `main`. Live geht die Seite erst mit einem **Release**:
