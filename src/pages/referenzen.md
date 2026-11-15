@@ -12,4 +12,4 @@ Jede Referenz beginnt mit einem Ablauf, der jede Woche Zeit gekostet hat. Daraus
 
 - [Fundus]({{base}}referenzen/fundus/): für mich selbst, als Privatperson. Google Fotos, Google Drive und Festplatten in einer Bibliothek auf dem eigenen Mac.
 
-Du hast auch so einen Ablauf? [Kickoff-Termin buchen]({{kickoff_href}}) oder schreib mir an [{{person.email}}](mailto:{{person.email}}).
+Du hast auch so einen Ablauf? [Kickoff anfragen]({{kickoff_href}}) oder schreib mir an [{{person.email}}](mailto:{{person.email}}).

@@ -54,4 +54,4 @@ Die erste Fassung von Fundus entstand im selben Rahmen wie ein Workshop. Seitdem
 
 ## Du hast auch so einen Ablauf?
 
-Im Workshop „{{offer.name}}“ bauen wir zusammen eine App für deinen zeitraubendsten Ablauf. [Kickoff-Termin buchen]({{kickoff_href}}) oder [zurück zu den Referenzen]({{base}}#referenzen).
+Im Workshop „{{offer.name}}“ bauen wir zusammen eine App für deinen zeitraubendsten Ablauf. [Kickoff anfragen]({{kickoff_href}}) oder [zurück zu den Referenzen]({{base}}#referenzen).
