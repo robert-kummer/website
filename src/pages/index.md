@@ -63,6 +63,13 @@ Bewusst nicht: {{offer.notIncluded}}
 
 Remote ohne Aufpreis, vor Ort zuzüglich Reisekosten. {{offer.vatNote}}
 
+## Referenz: zwei Apps für eine Hochzeitsfotografin
+
+Für Michelle Fiedler, Hochzeitsfotografin (<https://www.weddingsandotherstories.com/>):
+
+- **Story-Planer (Web-App, gebaut in 1,5 Tagen):** Nach jeder Hochzeit hat sie Fotos ausgewählt und Instagram-Stories von Hand geplant. Jetzt führt eine App durch den Ablauf und veröffentlicht mehrere Fotos je Event automatisch zur geplanten Zeit.
+- **Fundus (Mac-App, lokal, ohne Cloud):** Fotos, Videos und Dokumente in einer Bibliothek auf dem eigenen Mac, mit Schlagworten, Alben, Volltextsuche und geprüftem Backup auf ein zweites Laufwerk.
+
 ## Die Software Factory
 
 Deine Werkbank zum Weiterbauen: Anleitungen für Claude Code, Tests und automatisches Ausrollen. Open Source: <https://github.com/donePM/software-factory>

@@ -233,6 +233,29 @@
     li::before { content: counter(step, decimal-leading-zero); color: var(--muted); }
     .is-accent, .is-accent::before { color: var(--accent-text); }
   }
+  .carousel { margin-top: 56px; }
+  .carousel-controls { display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+    &[hidden] { display: none; }
+  }
+  .carousel-btn { min-width: 48px; min-height: 48px; border-radius: var(--radius); border: 1px solid var(--text); background: transparent;
+    color: var(--text); font: inherit; font-size: 1.25rem; cursor: pointer;
+    &:hover { background: var(--surface); }
+    &:disabled { border-color: var(--line); color: var(--muted); cursor: default; background: transparent; }
+  }
+  .carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; gap: var(--gutter);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+    padding-bottom: 12px; border-radius: var(--radius-card);
+    @media (prefers-reduced-motion: no-preference) { scroll-behavior: smooth; }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .carousel.is-enhanced .carousel-track { cursor: grab; }
+  }
+  .carousel-track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+  .slide { scroll-snap-align: start; scroll-snap-stop: always; min-width: 0;
+    .split-stretch { margin-top: 0; }
+    .meta { margin-top: 8px; }
+  }
+  .h-slide { font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.02em; }
   .placeholder { min-height: 280px; border-radius: var(--radius-card); border: 1px dashed var(--dashed); background: var(--surface); display: grid; place-items: center; }
 
   .terminal { flex: 1 1 520px; min-width: 0; background: var(--bg-deep); border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden;
@@ -319,7 +342,9 @@
     .btn { border: 2px solid ButtonText; }
   }
   @media print {
-    .site-header nav, .skip-link, .calc, .terminal { display: none; }
+    .site-header nav, .skip-link, .calc, .terminal, .carousel-controls { display: none; }
+    .carousel-track { display: block; overflow: visible; }
+    .slide { break-inside: avoid; margin-bottom: 32px; }
     body { background: #fff; color: #000; }
   }
 }

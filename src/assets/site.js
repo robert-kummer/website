@@ -67,6 +67,80 @@ if (form) {
 }
 
 // ---------------------------------------------------------------------------
+// Karussell: Scroll-Snap trägt, JS ergänzt Buttons, Status und inert
+// ---------------------------------------------------------------------------
+
+for (const carousel of document.querySelectorAll('.carousel')) {
+  const track = carousel.querySelector('.carousel-track');
+  const slides = [...track.children];
+  const prev = carousel.querySelector('[data-carousel="prev"]');
+  const next = carousel.querySelector('[data-carousel="next"]');
+  const current = carousel.querySelector('[data-carousel="current"]');
+  let index = 0;
+
+  const update = (i) => {
+    index = i;
+    slides.forEach((slide, n) => { slide.inert = n !== i; });
+    current.textContent = String(i + 1);
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  };
+  const go = (i) => {
+    const target = slides[Math.max(0, Math.min(slides.length - 1, i))];
+    track.scrollTo({ left: track.scrollLeft + target.getBoundingClientRect().left - track.getBoundingClientRect().left });
+  };
+
+  prev.addEventListener('click', () => go(index - 1));
+  next.addEventListener('click', () => go(index + 1));
+  track.addEventListener('keydown', (event) => {
+    if (event.target !== track) return;
+    if (event.key === 'ArrowLeft') { event.preventDefault(); go(index - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); go(index + 1); }
+  });
+
+  // Maus: Ziehen wie beim Wischen. Touch scrollt nativ, Trackpad und Umschalt+Mausrad ebenfalls.
+  let drag = null;
+  track.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('a, button, input, select, textarea')) return;
+    event.preventDefault();
+    drag = { x: event.clientX, left: track.scrollLeft, start: index, moved: false, id: event.pointerId };
+  });
+  track.addEventListener('pointermove', (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+    const dx = event.clientX - drag.x;
+    if (!drag.moved) {
+      if (Math.abs(dx) < 6) return;
+      drag.moved = true;
+      track.setPointerCapture(event.pointerId);
+      track.classList.add('is-dragging');
+    }
+    track.scrollLeft = drag.left - dx;
+  });
+  const endDrag = (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+    const { moved, x, start } = drag;
+    drag = null;
+    if (!moved) return;
+    track.classList.remove('is-dragging');
+    const dx = event.clientX - x;
+    go(Math.abs(dx) > track.clientWidth * 0.15 ? start + (dx < 0 ? 1 : -1) : start);
+  };
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) update(slides.indexOf(entry.target));
+    }
+  }, { root: track, threshold: 0.6 });
+  slides.forEach((slide) => observer.observe(slide));
+
+  carousel.querySelector('.carousel-controls').hidden = false;
+  carousel.classList.add('is-enhanced');
+  update(0);
+}
+
+// ---------------------------------------------------------------------------
 // WebMCP (imperativ)
 // ---------------------------------------------------------------------------
 
