@@ -41,6 +41,4 @@ Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschun
 
 Du kannst dich außerdem bei einer Aufsichtsbehörde beschweren. Für mich zuständig ist die Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59-61, 10555 Berlin, [www.datenschutz-berlin.de](https://www.datenschutz-berlin.de/).
 
-## Vorschau auf GitHub Pages
 
-Vor der Veröffentlichung zeige ich Entwürfe dieser Website unter robert-kummer.github.io. Diese Vorschau hostet GitHub Inc., USA. Dort gelten die [Datenschutzbestimmungen von GitHub](https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement). Die Vorschau ist für Suchmaschinen gesperrt.
