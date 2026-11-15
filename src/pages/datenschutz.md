@@ -23,7 +23,9 @@ Telefon: [{{person.telephone}}](tel:{{person.telephoneHref}})
 
 Die Website liegt bei der Mittwald CM Service GmbH & Co. KG, Königsberger Straße 4-6, 32339 Espelkamp, Deutschland. Mit Mittwald besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
 
-Beim Aufruf einer Seite speichert der Server technisch notwendige Daten in Logdateien: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, übertragene Datenmenge, Referrer und Browserkennung. Das dient dem sicheren Betrieb und der Fehlersuche. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse an einer stabilen und sicheren Website. Die Logdateien werden nach [ERGÄNZEN: Speicherdauer laut Mittwald, zum Beispiel 7 Tage] gelöscht oder anonymisiert.
+Beim Aufruf einer Seite speichert der Server technisch notwendige Daten in Logdateien: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, übertragene Datenmenge, Referrer und Browserkennung. Die IP-Adresse wird dabei nur gekürzt gespeichert: Mittwald entfernt die letzten Ziffern, auch bei IPv6. Das dient dem sicheren Betrieb und der Fehlersuche. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse an einer stabilen und sicheren Website.
+
+Die Zugriffsprotokolle werden nach 60 Tagen gelöscht, Fehlerprotokolle nach 7 Tagen. Aus den gekürzten Zugriffsprotokollen ermittelt Mittwald außerdem die Zahl der Besucher, nach der der Hosting-Tarif abgerechnet wird. Diese Statistik enthält keine vollständigen IP-Adressen. Ich nutze sie nicht für Werbung oder Profile.
 
 ## Cookies, Tracking, Inhalte von Dritten
 

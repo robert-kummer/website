@@ -23,6 +23,8 @@ E-Mail: [{{person.email}}](mailto:{{person.email}})
 
 ## Umsatzsteuer
 
+Umsatzsteuer-Identifikationsnummer nach § 27a Umsatzsteuergesetz: {{person.vatId}}
+
 Kleinunternehmer nach § 19 Umsatzsteuergesetz. Es wird keine Umsatzsteuer berechnet.
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV

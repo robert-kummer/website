@@ -351,7 +351,7 @@ def build(args: argparse.Namespace) -> Path:
          "image": site_url + person["photo"], "sameAs": [s["url"] for s in person["sameAs"]],
          "worksFor": {"@id": site_url + "#org"}},
         {"@type": "ProfessionalService", "@id": site_url + "#org", "name": site["name"], "url": site_url,
-         "logo": site_url + "icon-512.png", "image": site_url + person["photo"], "email": "mailto:" + person["email"],
+         "logo": site_url + "icon-512.png", "image": site_url + person["photo"], "email": "mailto:" + person["email"], "vatID": person["vatId"],
          "telephone": person["telephoneHref"], "address": address, "founder": {"@id": site_url + "#person"},
          "areaServed": {"@type": "Country", "name": person["country"]}},
     ]
