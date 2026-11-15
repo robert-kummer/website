@@ -1,6 +1,6 @@
 name: Deploy
 
-# Ein veröffentlichter Release lädt den Inhalt von public/ per SFTP zu Mittwald hoch.
+# Ein veröffentlichter Release baut die Seite (build.py → dist/) und lädt dist/ per SFTP zu Mittwald hoch.
 on:
   release:
     types: [published]
@@ -38,10 +38,16 @@ jobs:
           if [ "$HAS_KEY" != "true" ] && [ "$HAS_PASSWORD" != "true" ]; then
             echo "::error::Secret SFTP_PRIVATE_KEY oder SFTP_PASSWORD fehlt"; missing=1
           fi
-          if [ -z "$(find public -type f ! -name .gitkeep)" ]; then
-            echo "::error::public/ ist leer, nichts zu deployen"; missing=1
-          fi
           exit $missing
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Seite bauen
+        run: |
+          python3 build.py
+          test -f dist/index.html && test -f dist/.htaccess
 
       - name: lftp installieren
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
@@ -80,7 +86,7 @@ jobs:
             set net:timeout 30;
             set sftp:connect-program \"$ssh_cmd\";
             $open_cmd;
-            mirror --reverse --delete --verbose --parallel=4 --exclude-glob .gitkeep public/ \"$SFTP_PATH\";
+            mirror --reverse --delete --verbose --parallel=4 dist/ \"$SFTP_PATH\";
             bye
           "
 

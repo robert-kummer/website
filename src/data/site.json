@@ -1,0 +1,134 @@
+{
+  "site": {
+    "name": "Robert Kummer IT",
+    "url": "https://robert-kummer.de/",
+    "lang": "de",
+    "locale": "de_DE",
+    "description": "Ein Workshop für Firmen bis 50 Leute: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "themeColor": "#0E1013",
+    "webmcpOriginTrial": ""
+  },
+  "person": {
+    "name": "Robert Kummer",
+    "givenName": "Robert",
+    "familyName": "Kummer",
+    "jobTitle": "Software Engineer and AI Consultant",
+    "organization": "Robert Kummer IT",
+    "email": "post@robert-kummer.de",
+    "telephone": "+49 176 21237510",
+    "telephoneHref": "+4917621237510",
+    "streetAddress": "Hohenstaufenstraße 35",
+    "postalCode": "10779",
+    "locality": "Berlin",
+    "country": "Deutschland",
+    "countryCode": "DE",
+    "photo": "assets/img/robert-kummer-800.jpg",
+    "photoCredit": "Michelle Fiedler / Cam Agency",
+    "vcard": "robert-kummer.vcf",
+    "sameAs": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/robertkummer/"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/robert-kummer"
+      }
+    ]
+  },
+  "offer": {
+    "name": "Produktiv in 12 Stunden",
+    "summary": "Workshop für Firmen bis 50 Leute: Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "audience": "Firmen bis 50 Leute, interne Abläufe",
+    "currency": "EUR",
+    "pricePerDay": 1000,
+    "weekdaySurchargePerDay": 500,
+    "days": [
+      1,
+      2,
+      3
+    ],
+    "recommendedDays": 2,
+    "preferredTiming": "Freitag bis Sonntag",
+    "remote": "ohne Aufpreis",
+    "onsite": "zzgl. Reisekosten nach Aufwand",
+    "vatNote": "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.",
+    "requirement": "Du hast schon Zugriff auf die Daten, die dein Ablauf braucht: Exporte, Postfach, API-Zugang oder Dateien.",
+    "steps": [
+      {
+        "when": "2 Wochen vorher",
+        "title": "Kickoff, 30 Minuten",
+        "text": "Idee, Nutzer, Daten. Danach sage ich ehrlich, ob 1, 2 oder 3 Tage passen."
+      },
+      {
+        "when": "3 Tage vorher",
+        "title": "Deine Accounts",
+        "text": "GitHub, EU-Server, Domain, Claude. Mit Anleitung, rund eine Stunde."
+      },
+      {
+        "when": "Tag 1",
+        "title": "Einfach anfangen",
+        "text": "Ich baue, du entscheidest. Abends läuft der erste Ablauf komplett, live auf deiner Domain."
+      },
+      {
+        "when": "Tag 2–3",
+        "title": "Du übernimmst",
+        "text": "Feinschliff oder der nächste Ablauf, und du machst immer mehr davon selbst."
+      },
+      {
+        "when": "Danach",
+        "title": "Du baust weiter",
+        "text": "Mit der Software Factory, ohne mich. Wenn du doch Hilfe brauchst, bin ich erreichbar."
+      }
+    ],
+    "deliverables": [
+      "Eine WebApp für dein Team: mit Login, im Browser und auf dem Handy, auf deinem eigenen Server in der EU (zum Beispiel Hetzner).",
+      "Oder eine Mac-App für einzelne Arbeitsplätze und lokale Dateien, selbst signiert, ohne Serverkosten.",
+      "Der Quellcode gehört dir. Dazu die Software Factory, mit der du ohne mich weiterbaust."
+    ],
+    "notIncluded": "Apps für deine Kunden und SaaS-Produkte. Die brauchen Sicherheitsprüfung, Support und Betrieb, das passt nicht in 1 bis 3 Tage.",
+    "kickoff": "Kostenloses Kickoff-Gespräch, 30 Minuten, unverbindlich. Anfrage per E-Mail an post@robert-kummer.de."
+  },
+  "faq": [
+    {
+      "q": "Muss ich die ganze Zeit dabei sein?",
+      "a": "Ja, das ist der Kern des Workshops. Wir kommen so schnell voran, dass ich ständig deine Entscheidungen und dein Fachwissen brauche. Plane die gebuchten Tage voll ein, ohne Termine nebenher. Gern mit einer zweiten Person, die den Ablauf aus dem Alltag kennt."
+    },
+    {
+      "q": "Was, wenn wir an einem Tag nicht fertig werden?",
+      "a": "Darum starten wir mit einem einfachen Thema und lösen es komplett. Am Abend von Tag 1 läuft der Kernprozess einmal durch. Den Rest machen wir an Tag 2 oder 3, oder du baust ihn später selbst."
+    },
+    {
+      "q": "Und wenn ich später doch Hilfe brauche?",
+      "a": "Dann bin ich da und du kannst Folge-Tage zum selben Tagessatz buchen. Das Ziel ist aber, dass du nach zwei Tagen selbst weiterbauen kannst."
+    },
+    {
+      "q": "Wer betreibt die App danach?",
+      "a": "Du. Repository und Hosting laufen von Anfang an auf deinen Accounts, der Server bei einem EU-Anbieter wie Hetzner. Ich betreibe nichts."
+    },
+    {
+      "q": "Was kostet der Betrieb?",
+      "a": "Den Server bei Hetzner oder einem anderen EU-Anbieter zahlst du direkt dort, nach deren Tarif. Ausgerollt wird über GitHub Actions, dafür fallen keine weiteren Tools an. Eine Mac-App läuft lokal ohne Serverkosten."
+    },
+    {
+      "q": "Wo liegen unsere Daten?",
+      "a": "In der EU, bei einem europäischen Anbieter wie Hetzner, nicht bei AWS oder einem anderen US-Hyperscaler. Im Workshop arbeiten wir mit Testdaten, echte Kundendaten gehen nicht durch die KI."
+    },
+    {
+      "q": "Brauchen wir Programmierer im Team?",
+      "a": "Nein. Du bringst das Wissen über deinen Ablauf mit, ich das Technische. Im Workshop lernst du, wie du mit KI selbst Änderungen umsetzt, und jeder Entwickler kann direkt weiterarbeiten."
+    },
+    {
+      "q": "Baust du auch Apps für unsere Kunden oder ein SaaS-Produkt?",
+      "a": "Nein. Im Workshop entstehen Werkzeuge für deine internen Abläufe. Eine App für Kunden oder ein Produkt zum Verkaufen braucht Sicherheitsprüfung, Support und Betrieb, das lässt sich nicht verantwortungsvoll in 1 bis 3 Tagen bauen."
+    },
+    {
+      "q": "Was muss ich vorbereiten?",
+      "a": "Zugriff auf die Daten, die dein Ablauf braucht, plus Accounts bei GitHub, einem EU-Hoster wie Hetzner und Claude. Du bekommst eine Schritt-für-Schritt-Anleitung, das dauert etwa eine Stunde."
+    },
+    {
+      "q": "Remote oder vor Ort?",
+      "a": "Beides. Remote kostet nichts extra. Vor Ort kommen Reisekosten nach Aufwand dazu."
+    }
+  ]
+}
