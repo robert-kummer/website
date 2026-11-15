@@ -226,88 +226,42 @@ priority: 1.0
 <!-- Referenzen -->
 <section id="referenzen" class="section" aria-labelledby="referenzen-titel">
   <div class="wrap">
-    <h2 id="referenzen-titel" class="eyebrow">Referenzen · Abläufe und Apps</h2>
+    <h2 id="referenzen-titel" class="eyebrow">Referenz · Ablauf und App</h2>
 
-    <div class="carousel" role="region" aria-roledescription="Karussell" aria-label="Referenzen">
-      <div class="carousel-controls" hidden>
-        <button type="button" class="carousel-btn" data-carousel="prev" aria-label="Vorherige Referenz">←</button>
-        <p class="meta carousel-status" aria-live="polite"><span data-carousel="current">1</span> von 2</p>
-        <button type="button" class="carousel-btn" data-carousel="next" aria-label="Nächste Referenz">→</button>
+    <div class="references" id="app-fundus">
+      <div class="split split-stretch">
+        <div class="grow">
+          <p class="slide-client">Für mich selbst, als Privatperson</p>
+          <h3 class="h-slide">Fundus</h3>
+          <p class="meta">Mac-App · Dateien bleiben auf dem eigenen Mac · erste Fassung im Workshop-Rahmen</p>
+          <p class="body-md">Fotos und Dateien lagen in Google Fotos, Google Drive und auf Festplatten. Jetzt liegt alles in einer Bibliothek auf dem eigenen Mac, private und gewerbliche Dokumente getrennt, durchsuchbar bis in den Text gescannter Belege. Von Hand einsortieren muss ich nichts mehr: Dokument hineinziehen, und die lokale KI archiviert es an der richtigen Stelle.</p>
+          <ol class="numbered">
+            <li>Google-Export und Dateien in die Inbox legen</li>
+            <li>Lokale KI und Texterkennung ordnen jede Datei automatisch ein</li>
+            <li>Suchen, filtern, in Alben sammeln</li>
+            <li class="is-accent">Backup läuft automatisch und wird geprüft</li>
+          </ol>
+          <p class="slide-more"><a href="{{base}}referenzen/fundus/">Ganze Referenz lesen<span class="sr-only">: Fundus</span></a></p>
+        </div>
+        <div class="gallery grow">
+          <div class="shots" role="group" aria-label="Bilder zu Fundus, waagerecht scrollbar" tabindex="0">
+            <figure class="shot">
+              <button type="button" class="zoom" popovertarget="lb-home-fundus-zeit">
+                <img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Zeitleiste: oben eine Reihe „An diesem Tag“ mit Fotos von vor vier Jahren, darunter je Jahr eine Zeile mit einer Kachel pro Monat und der Zahl der Dateien, insgesamt 29.302 Dateien. Links die Seitenleiste mit Inbox, Karte, Filtern, Fotos, Dokumenten und Schlagworten."><span class="sr-only"> (vergrößern)</span>
+              </button>
+              <figcaption class="meta">Zeitleiste, Fotos unkenntlich gemacht</figcaption>
+            </figure>
+            <figure class="shot">
+              <button type="button" class="zoom" popovertarget="lb-home-fundus-karte">
+                <img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Karte: Fotos mit GPS erscheinen als Stapel über Europa, etwa in Portugal, Spanien, Italien und Griechenland, jeder Stapel mit der Zahl seiner Fotos."><span class="sr-only"> (vergrößern)</span>
+              </button>
+              <figcaption class="meta">Karte, Fotos unkenntlich gemacht</figcaption>
+            </figure>
+          </div>
+          <div id="lb-home-fundus-zeit" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-zeit" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
+          <div id="lb-home-fundus-karte" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-karte" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
+        </div>
       </div>
-      <ul class="carousel-track" role="list" tabindex="0" aria-label="Referenzen, waagerecht scrollbar">
-        <li class="slide" id="app-instaposter" aria-roledescription="Folie" aria-label="1 von 2: InstaPoster">
-          <div class="split split-stretch">
-            <div class="grow">
-              <p class="slide-client">Für Michelle Fiedler, Hochzeitsfotografin</p>
-              <h3 class="h-slide" lang="en">InstaPoster</h3>
-              <p class="meta">Mac-App · verbindet <span lang="en">Canva</span> und <span lang="en">Postiz</span> · gebaut in 1,5 Tagen</p>
-              <p class="body-md">Aus 1.000 Hochzeitsfotos werden 30 fertig geplante Instagram-Beiträge. Geschätzt spart das rund 8,5 Stunden Arbeit je Hochzeit.</p>
-              <ol class="numbered">
-                <li>Fotos auswählen, die KI sortiert sie offline vor</li>
-                <li>InstaPoster füllt die Canva-Vorlagen</li>
-                <li>Korrektur und Freigabe in Canva</li>
-                <li>InstaPoster plant die Beiträge in Postiz ein</li>
-                <li class="is-accent">Postiz stellt sie zum Termin auf Instagram live</li>
-              </ol>
-              {{testimonial.instaposter.short}}
-              <p class="slide-more"><a href="{{base}}referenzen/instaposter/">Ganze Referenz lesen<span class="sr-only">: InstaPoster</span></a></p>
-            </div>
-            <div class="gallery grow">
-              <div class="shots" role="group" aria-label="Bilder zu InstaPoster, waagerecht scrollbar" tabindex="0">
-                <figure class="shot">
-                  <button type="button" class="zoom" popovertarget="lb-home-kategorisieren">
-                    <img src="{{base}}assets/img/instaposter-kategorisieren.jpg" width="1616" height="815" loading="lazy" decoding="async" alt="InstaPoster, Ansicht Kategorisieren: Jedes Foto bekommt Kategorien mit Trefferquote, etwa Dekoration 95 %, Party 85 % oder Couple Shoot 95 %, dazu eine kurze Begründung."><span class="sr-only"> (vergrößern)</span>
-                  </button>
-                  <figcaption class="meta">Kategorisieren, Fotos und Dateinamen unkenntlich gemacht</figcaption>
-                </figure>
-                <figure class="shot">
-                  <button type="button" class="zoom zoom-flow" popovertarget="lb-home-ablauf">
-                    {{partials.instaposter_flow}}<span class="sr-only">Ablauf vergrößern</span>
-                  </button>
-                  <figcaption class="meta">Ablauf je Hochzeit, Zeitaufwand geschätzt</figcaption>
-                </figure>
-              </div>
-              <div id="lb-home-kategorisieren" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-kategorisieren" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/instaposter-kategorisieren.jpg" width="1616" height="815" loading="lazy" decoding="async" alt=""></button></div>
-              <div id="lb-home-ablauf" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-ablauf" popovertargetaction="hide" aria-label="Großansicht schließen">{{partials.instaposter_flow_lightbox}}</button></div>
-            </div>
-          </div>
-        </li>
-        <li class="slide" id="app-fundus" aria-roledescription="Folie" aria-label="2 von 2: Fundus">
-          <div class="split split-stretch">
-            <div class="grow">
-              <p class="slide-client">Für mich selbst, als Privatperson</p>
-              <h3 class="h-slide">Fundus</h3>
-              <p class="meta">Mac-App · Dateien bleiben auf dem eigenen Mac · erste Fassung im Workshop-Rahmen</p>
-              <p class="body-md">Fotos und Dateien lagen in Google Fotos, Google Drive und auf Festplatten. Jetzt liegt alles in einer Bibliothek auf dem eigenen Mac, private und gewerbliche Dokumente getrennt, durchsuchbar bis in den Text gescannter Belege. Von Hand einsortieren muss ich nichts mehr: Dokument hineinziehen, und die lokale KI archiviert es an der richtigen Stelle.</p>
-              <ol class="numbered">
-                <li>Google-Export und Dateien in die Inbox legen</li>
-                <li>Lokale KI und Texterkennung ordnen jede Datei automatisch ein</li>
-                <li>Suchen, filtern, in Alben sammeln</li>
-                <li class="is-accent">Backup läuft automatisch und wird geprüft</li>
-              </ol>
-              <p class="slide-more"><a href="{{base}}referenzen/fundus/">Ganze Referenz lesen<span class="sr-only">: Fundus</span></a></p>
-            </div>
-            <div class="gallery grow">
-              <div class="shots" role="group" aria-label="Bilder zu Fundus, waagerecht scrollbar" tabindex="0">
-                <figure class="shot">
-                  <button type="button" class="zoom" popovertarget="lb-home-fundus-zeit">
-                    <img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Zeitleiste: oben eine Reihe „An diesem Tag“ mit Fotos von vor vier Jahren, darunter je Jahr eine Zeile mit einer Kachel pro Monat und der Zahl der Dateien, insgesamt 29.302 Dateien. Links die Seitenleiste mit Inbox, Karte, Filtern, Fotos, Dokumenten und Schlagworten."><span class="sr-only"> (vergrößern)</span>
-                  </button>
-                  <figcaption class="meta">Zeitleiste, Fotos unkenntlich gemacht</figcaption>
-                </figure>
-                <figure class="shot">
-                  <button type="button" class="zoom" popovertarget="lb-home-fundus-karte">
-                    <img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt="Fundus, Ansicht Karte: Fotos mit GPS erscheinen als Stapel über Europa, etwa in Portugal, Spanien, Italien und Griechenland, jeder Stapel mit der Zahl seiner Fotos."><span class="sr-only"> (vergrößern)</span>
-                  </button>
-                  <figcaption class="meta">Karte, Fotos unkenntlich gemacht</figcaption>
-                </figure>
-              </div>
-              <div id="lb-home-fundus-zeit" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-zeit" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-zeitleiste.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
-              <div id="lb-home-fundus-karte" class="lightbox" popover><button type="button" class="lightbox-close" popovertarget="lb-home-fundus-karte" popovertargetaction="hide" aria-label="Großansicht schließen"><img src="{{base}}assets/img/fundus-karte.jpg" width="1523" height="812" loading="lazy" decoding="async" alt=""></button></div>
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
   </div>
 </section>

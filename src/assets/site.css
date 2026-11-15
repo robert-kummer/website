@@ -340,7 +340,7 @@
     li::before { content: counter(step, decimal-leading-zero); color: var(--muted); }
     .is-accent, .is-accent::before { color: var(--accent-text); }
   }
-  .carousel { margin-top: 56px; }
+  .carousel, .references { margin-top: 56px; }
   .carousel-controls { display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
     &[hidden] { display: none; }
   }

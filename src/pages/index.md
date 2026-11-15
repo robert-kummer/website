@@ -78,9 +78,8 @@ Bewusst nicht: {{offer.notIncluded}}
 
 Remote ohne Aufpreis, vor Ort zuzüglich Reisekosten. {{offer.vatNote}}
 
-## Referenzen: Abläufe und Apps
+## Referenz: Ablauf und App
 
-- **InstaPoster** für Michelle Fiedler, Hochzeitsfotografin (<https://www.weddingsandotherstories.com/>). Mac-App, verbindet Canva und Postiz, gebaut in 1,5 Tagen. Aus 1.000 Hochzeitsfotos werden 30 fertig geplante Instagram-Beiträge, geschätzt rund 8,5 Stunden weniger Arbeit je Hochzeit. Ablauf: Fotos auswählen, die KI sortiert sie offline vor; InstaPoster füllt die Canva-Vorlagen; Korrektur und Freigabe in Canva; InstaPoster plant die Beiträge in Postiz ein; Postiz stellt sie zum Termin auf Instagram live.{{testimonial.instaposter.short_md}} [Ganze Referenz]({{base}}referenzen/instaposter/)
 - **Fundus** für mich selbst, als Privatperson. Mac-App, die Dateien bleiben auf dem eigenen Mac. Die erste Fassung entstand im selben Rahmen wie ein Workshop. Fotos und Dateien aus Google Fotos, Google Drive und von Festplatten in einer Bibliothek, private und gewerbliche Dokumente getrennt, durchsuchbar bis in den Text gescannter Belege. Von Hand einsortieren muss ich nichts mehr: Dokument hineinziehen, und die lokale KI archiviert es an der richtigen Stelle. Ablauf: Google-Export und Dateien in die Inbox legen; lokale KI und Texterkennung ordnen jede Datei automatisch ein; suchen, filtern, in Alben sammeln; Backup läuft automatisch und wird geprüft. [Ganze Referenz]({{base}}referenzen/fundus/)
 
 ## Die Software Factory
