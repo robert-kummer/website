@@ -401,6 +401,7 @@ def build(args: argparse.Namespace) -> Path:
         if md_source is not None and page["md_rel"]:
             md_text = render(md_source, {**ctx, "base": site_url}, escape=False, source=meta.get("markdown", name)).strip()
             md_text = re.sub(r'<p class="updated">(.*?)</p>', lambda m: re.sub(r"<[^>]+>", "", m.group(1)), md_text)
+            md_text = re.sub(r'<span lang="[^"]+">(.*?)</span>', r"\1", md_text)  # Sprachauszeichnung nur im HTML
             md_text += f"\n\n---\n\nQuelle: <{page['url']}>\n"
             write(out / page["md_rel"], md_text)
             markdown_docs.append((page, md_text))
