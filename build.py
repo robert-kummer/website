@@ -2,7 +2,7 @@
 """Baut die Website aus src/ nach dist/. Nur Python-Standardbibliothek.
 
     python3 build.py                          # Produktion (robert-kummer.de)
-    python3 build.py --preview --base-path /website/ --site-url https://robert-kummer.github.io/website/
+    python3 build.py --preview --base-path /website/
     python3 build.py --serve                  # bauen und lokal unter http://localhost:8000 zeigen
 """
 from __future__ import annotations
@@ -226,7 +226,8 @@ def build(args: argparse.Namespace) -> Path:
     data = json.loads((SRC / "data" / "site.json").read_text(encoding="utf-8"))
     site, person, offer = data["site"], data["person"], data["offer"]
     base = "/" + args.base_path.strip("/") + "/" if args.base_path.strip("/") else "/"
-    site_url = (args.site_url or site["url"]).rstrip("/") + "/"
+    # Alle absoluten Adressen zeigen auf die Live-Domain, auch in Vorschau und lokal (canonical).
+    site_url = site["url"].rstrip("/") + "/"
     site = {**site, "url": site_url}
     today = dt.date.today()
     out = ROOT / args.out
@@ -534,13 +535,10 @@ def serve(directory: Path, port: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Baut die Website nach dist/.")
     parser.add_argument("--base-path", default="/", help="Pfad, unter dem die Seite liegt, z. B. /website/")
-    parser.add_argument("--site-url", default=None, help="Öffentliche Adresse, Standard aus site.json")
     parser.add_argument("--preview", action="store_true", help="Vorschau: noindex und robots.txt sperrt alles")
     parser.add_argument("--out", default="dist", help="Ausgabeordner")
     parser.add_argument("--serve", nargs="?", const=8000, type=int, metavar="PORT", help="nach dem Bauen lokal ausliefern")
     args = parser.parse_args()
-    if args.serve and not args.site_url:
-        args.site_url = f"http://localhost:{args.serve}/"
     out = build(args)
     if args.serve:
         serve(out, args.serve)

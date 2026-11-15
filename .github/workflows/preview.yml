@@ -35,7 +35,7 @@ jobs:
         # --preview setzt noindex und eine robots.txt mit Disallow: /,
         # damit die Vorschau nicht mit robert-kummer.de konkurriert
         run: |
-          python3 build.py --preview --base-path /website/ --site-url https://robert-kummer.github.io/website/ --out _site
+          python3 build.py --preview --base-path /website/ --out _site
           grep -q 'noindex' _site/index.html
 
       - uses: actions/configure-pages@v5
