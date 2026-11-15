@@ -1,0 +1,88 @@
+name: Deploy
+
+# Ein veröffentlichter Release lädt den Inhalt von public/ per SFTP zu Mittwald hoch.
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://robert-kummer.de
+    steps:
+      - name: Release-Tag auschecken
+        uses: actions/checkout@v4
+
+      - name: Konfiguration prüfen
+        env:
+          SFTP_HOST: ${{ vars.SFTP_HOST }}
+          SFTP_USER: ${{ vars.SFTP_USER }}
+          SFTP_PATH: ${{ vars.SFTP_PATH }}
+          SFTP_KNOWN_HOSTS: ${{ vars.SFTP_KNOWN_HOSTS }}
+          HAS_KEY: ${{ secrets.SFTP_PRIVATE_KEY != '' }}
+          HAS_PASSWORD: ${{ secrets.SFTP_PASSWORD != '' }}
+        run: |
+          missing=0
+          for v in SFTP_HOST SFTP_USER SFTP_PATH SFTP_KNOWN_HOSTS; do
+            if [ -z "${!v}" ]; then echo "::error::Variable $v fehlt"; missing=1; fi
+          done
+          if [ "$HAS_KEY" != "true" ] && [ "$HAS_PASSWORD" != "true" ]; then
+            echo "::error::Secret SFTP_PRIVATE_KEY oder SFTP_PASSWORD fehlt"; missing=1
+          fi
+          if [ -z "$(find public -type f ! -name .gitkeep)" ]; then
+            echo "::error::public/ ist leer, nichts zu deployen"; missing=1
+          fi
+          exit $missing
+
+      - name: lftp installieren
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: SSH vorbereiten
+        env:
+          SFTP_KNOWN_HOSTS: ${{ vars.SFTP_KNOWN_HOSTS }}
+          SFTP_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SFTP_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          if [ -n "$SFTP_PRIVATE_KEY" ]; then
+            printf '%s\n' "$SFTP_PRIVATE_KEY" > ~/.ssh/deploy_key
+            chmod 600 ~/.ssh/deploy_key
+          fi
+
+      - name: Per SFTP hochladen
+        env:
+          SFTP_HOST: ${{ vars.SFTP_HOST }}
+          SFTP_PORT: ${{ vars.SFTP_PORT || '22' }}
+          SFTP_USER: ${{ vars.SFTP_USER }}
+          SFTP_PATH: ${{ vars.SFTP_PATH }}
+          LFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+        run: |
+          ssh_cmd="ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+          if [ -f ~/.ssh/deploy_key ]; then
+            ssh_cmd="$ssh_cmd -o IdentitiesOnly=yes -i $HOME/.ssh/deploy_key"
+            open_cmd="open -u \"$SFTP_USER\", sftp://$SFTP_HOST:$SFTP_PORT"
+          else
+            open_cmd="open --env-password -u \"$SFTP_USER\" sftp://$SFTP_HOST:$SFTP_PORT"
+          fi
+          lftp -e "
+            set cmd:fail-exit yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            set sftp:connect-program \"$ssh_cmd\";
+            $open_cmd;
+            mirror --reverse --delete --verbose --parallel=4 --exclude-glob .gitkeep public/ \"$SFTP_PATH\";
+            bye
+          "
+
+      - name: Zusammenfassung
+        run: echo "Release ${{ github.event.release.tag_name }} nach ${{ vars.SFTP_PATH }} deployt." >> "$GITHUB_STEP_SUMMARY"
