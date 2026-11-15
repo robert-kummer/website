@@ -37,4 +37,5 @@ Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor ei
 
 ## Bildnachweis
 
-Porträtfoto: {{person.photoCredit}}
+Porträtfoto: © {{person.photoCredit}}<br>
+Cam Agency bei [LinkedIn](https://www.linkedin.com/company/camagencyhamburg/) und [Instagram](https://www.instagram.com/cam.filmagency/)
