@@ -4,7 +4,7 @@
     "url": "https://robert-kummer.de/",
     "lang": "de",
     "locale": "de_DE",
-    "description": "Ein Workshop für Firmen bis 50 Leute: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "description": "Ein Workshop für Selbstständige und Unternehmen bis 50 Mitarbeitende: Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
     "themeColor": "#0E1013",
     "webmcpOriginTrial": ""
   },
@@ -39,8 +39,8 @@
   },
   "offer": {
     "name": "Produktiv in 12 Stunden",
-    "summary": "Workshop für Firmen bis 50 Leute: Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
-    "audience": "Firmen bis 50 Leute, interne Abläufe",
+    "summary": "Workshop für Selbstständige und Unternehmen bis 50 Mitarbeitende: Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.",
+    "audience": "Selbstständige und Unternehmen bis 50 Mitarbeitende, interne Abläufe",
     "currency": "EUR",
     "pricePerDay": 1000,
     "weekdaySurchargePerDay": 500,

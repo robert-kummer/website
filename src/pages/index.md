@@ -1,6 +1,6 @@
 # Produktiv in 12 Stunden
 
-> Workshop von {{site.name}} für Firmen bis 50 Leute. Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür: du mit deinem Fachwissen, ich mit der Technik. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.
+> Workshop von {{site.name}} für Selbstständige und Unternehmen bis 50 Mitarbeitende. Du bringst einen Ablauf mit, der dein Team jede Woche Zeit kostet. Wir bauen zusammen eine App dafür: du mit deinem Fachwissen, ich mit der Technik. Am Abend läuft sie, sie gehört dir, und du weißt, wie du selbst weiterbaust.
 
 - Anbieter: {{person.name}}, {{site.name}}, {{person.locality}}
 - Preis: 1.000 € pro Tag (Freitag bis Sonntag), unter der Woche 1.500 € pro Tag
