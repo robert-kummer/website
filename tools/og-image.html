@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Vorlage für das Share-Bild (og:image), 1200 × 630. Neu erzeugen mit: tools/og-image.sh -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Geist'; src: url('../src/assets/fonts/Geist-Variable.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Geist Mono'; src: url('../src/assets/fonts/GeistMono-Variable.woff2') format('woff2'); font-weight: 100 900; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #0E1013;
+    background-image: radial-gradient(900px 500px at 15% 0%, rgb(182 153 99 / .14), transparent 70%);
+    color: #ECEAE4; font-family: 'Geist', sans-serif; -webkit-font-smoothing: antialiased;
+    display: grid; grid-template-columns: 1fr 420px;
+  }
+  .text { padding: 64px 0 60px 72px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 600; }
+  .brand svg { color: #B69963; }
+  .eyebrow { margin-top: auto; font-family: 'Geist Mono', monospace; font-size: 22px; color: #A6ACB4; }
+  h1 { margin-top: 18px; font-size: 92px; line-height: .98; letter-spacing: -0.045em; font-weight: 600; }
+  .dot { color: #B69963; }
+  .lead { margin-top: 28px; font-size: 27px; line-height: 1.4; color: #C9CCD1; max-width: 640px; }
+  .url { margin-top: auto; padding-top: 32px; font-family: 'Geist Mono', monospace; font-size: 22px; color: #C2A673; }
+  .photo { position: relative; height: 630px; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+  .photo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0E1013 0%, rgb(14 16 19 / 0) 28%); }
+</style>
+</head>
+<body>
+  <div class="text">
+    <p class="brand">
+      <svg viewBox="0 0 332 332" width="40" height="40" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M 18 20 C 47 18 80 2 114 2 C 134 2 146 12 157 12 C 164 12 170 5 175 6 C 180 16 177 32 167 40 C 165 50 178 60 184 68 C 187 78 174 84 158 83 L 158 112 L 267 24 C 276 17 286 12 293 19 C 298 25 293 35 283 42 L 187 120 C 197 173 228 224 270 224 C 294 224 307 208 314 188 C 319 180 326 175 330 174 C 334 203 324 243 280 250 C 234 256 196 230 176 194 C 178 233 194 274 216 300 C 222 310 222 326 214 330 C 198 334 182 308 170 280 C 158 250 150 210 146 172 C 140 202 134 240 120 264 C 114 274 108 272 106 262 C 104 244 114 216 114 190 C 90 220 54 252 20 266 C 6 270 -2 262 2 248 C 6 236 24 228 40 214 C 70 188 94 150 94 116 C 84 100 64 90 50 92 C 44 94 40 102 38 110 C 34 100 28 90 26 76 C 20 62 12 46 12 30 C 12 23 15 20 18 20 Z M 42 42 C 44 52 50 60 56 60 C 60 54 66 46 70 42 C 60 40 50 40 42 42 Z M 90 44 C 80 50 78 64 90 76 C 102 88 120 96 132 106 C 132 76 120 44 90 44 Z"/></svg>
+      Robert Kummer IT
+    </p>
+    <p class="eyebrow">Workshop für Selbstständige und Teams bis 50</p>
+    <h1>Produktiv in 12&#160;Stunden<span class="dot">.</span></h1>
+    <p class="lead">Wir bauen zusammen eine App für deinen zeitraubendsten Ablauf. Am Abend läuft sie, und sie gehört dir.</p>
+    <p class="url">robert-kummer.de</p>
+  </div>
+  <div class="photo"><img src="../src/assets/img/robert-kummer-800.jpg" alt=""></div>
+</body>
+</html>

@@ -5,6 +5,8 @@ description: Fundus bringt Google Fotos, Google Drive und Festplatten in einer B
 path: /referenzen/fundus/
 llms_section: Referenzen
 priority: 0.6
+image: assets/img/fundus-karte.jpg
+image_alt: Fundus: Fotos und Dokumente auf einer Karte
 ---
 # Fundus
 

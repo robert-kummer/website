@@ -12,6 +12,7 @@ src/data/site.json             Alle Fakten an einer Stelle: Kontakt, Angebot, Pr
 src/assets/                    CSS, JavaScript, Schriften (Geist, selbst gehostet), Bilder
 src/static/                    Dateien für das Wurzelverzeichnis: Favicons, vCard, .htaccess
 build.py                       Baut alles nach dist/ (nur Python-Standardbibliothek)
+tools/og-image.*               Vorlage und Skript für das Share-Bild (og:image)
 .github/workflows/preview.yml  Vorschau auf GitHub Pages bei jedem Push auf main
 .github/workflows/deploy.yml   Deployment zu Mittwald bei jedem Release
 ```
@@ -28,6 +29,12 @@ python3 build.py --serve      # baut und zeigt die Seite unter http://localhost:
 ```
 
 Neue Seite: eine Markdown-Datei mit Front Matter (`title`, `nav_title`, `description`, `path`, `llms_section`, `priority`) in `src/pages/` legen. Sie landet automatisch in Sitemap, `llms.txt`, `llms-full.txt` und im WebMCP-Werkzeug `get_page_markdown`.
+
+### Vorschau in sozialen Netzwerken
+
+Jede Seite bekommt Open-Graph- und Twitter-Card-Tags (`summary_large_image`). Breite, Höhe und Typ des Bildes liest der Build aus der Datei. Standard ist `src/assets/img/og-image.jpg` (1200 × 630). Eine Seite kann im Front Matter ein eigenes Bild setzen: `image: assets/img/….jpg` (Pfad unter `src/`, JPEG oder PNG, am besten etwa 1,91:1) und `image_alt: …`. `og:title` ist der Seitentitel ohne „ – Robert Kummer IT“, abweichend geht `og_title: …`.
+
+Das Standardbild entsteht aus `tools/og-image.html`. Nach Änderungen an Text oder Foto `tools/og-image.sh` ausführen (braucht Google Chrome) und das neue Bild einchecken. Netzwerke speichern Vorschauen lange zwischen, eine Aktualisierung erzwingt man mit dem [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) bzw. dem [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/).
 
 ## Was die Seite kann
 

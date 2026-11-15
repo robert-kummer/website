@@ -192,6 +192,21 @@ def write(path: Path, content: str | bytes) -> None:
         path.write_text(content, encoding="utf-8")
 
 
+def image_info(path: Path) -> tuple[str, int, int]:
+    """MIME-Typ, Breite und Höhe eines JPEG oder PNG, ohne Fremdbibliothek (für og:image:width/height)."""
+    data = path.read_bytes()
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png", int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+    if data[:2] == b"\xff\xd8":
+        i = 2
+        while i < len(data):
+            marker, length = data[i + 1], int.from_bytes(data[i + 2:i + 4], "big")
+            if marker in (0xC0, 0xC1, 0xC2):  # SOF: Höhe, dann Breite
+                return "image/jpeg", int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big")
+            i += 2 + length
+    sys.exit(f"{path}: nur JPEG oder PNG als Share-Bild")
+
+
 def minify_css(css: str) -> str:
     css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
     css = re.sub(r"\s+", " ", css)
@@ -473,12 +488,20 @@ def build(args: argparse.Namespace) -> Path:
             write(out / page["md_rel"], md_text)
             markdown_docs.append((page, md_text))
 
+        # Social-Media-Vorschau: Bild pro Seite (Front Matter "image", Pfad unter src/), sonst das Standardbild
+        image_rel = meta.get("image", "assets/img/og-image.jpg")
+        image_type, image_w, image_h = image_info(SRC / image_rel)
+        image_alt = meta.get("image_alt", f"{site['name']}: Workshop „{offer['name']}“ mit Porträt von {person['name']}")
+        # og:title ohne angehängten Seitennamen, der steht schon in og:site_name
+        og_title = meta.get("og_title") or re.sub(r"\s+–\s+" + re.escape(site["name"]) + r"$", "", meta["title"])
+
         graph = list(graph_base) + [{
             "@type": "WebPage", "@id": page["url"] + "#webpage", "url": page["url"], "name": meta["title"],
             "description": meta.get("description", site["description"]), "inLanguage": site["lang"],
             "isPartOf": {"@id": site_url + "#website"},
             "about": {"@id": site_url + ("#workshop" if page["id"] == "home" else "#person")},
             "dateModified": today.isoformat(),
+            "primaryImageOfPage": {"@type": "ImageObject", "url": site_url + image_rel, "width": image_w, "height": image_h},
         }]
         if page["id"] == "home":
             graph += [service, faq_ld]
@@ -495,7 +518,8 @@ def build(args: argparse.Namespace) -> Path:
             "rel_me_links": rel_me_links, "rel_me_list": rel_me_list,
             "css_href": page["base"] + assets["site.css"][0], "css_sri": assets["site.css"][1],
             "js_href": page["base"] + assets["site.js"][0], "js_sri": assets["site.js"][1],
-            "og_image": site_url + person["photo"],
+            "og_title": og_title, "og_image": site_url + image_rel, "og_image_type": image_type,
+            "og_image_width": str(image_w), "og_image_height": str(image_h), "og_image_alt": image_alt,
             "jsonld": Raw(jsonld), "speculation_rules": Raw(speculation),
             "content": Raw("\x00CONTENT\x00"),
         }

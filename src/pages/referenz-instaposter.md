@@ -5,6 +5,8 @@ description: InstaPoster sortiert Hochzeitsfotos mit der KI von Apple offline au
 path: /referenzen/instaposter/
 llms_section: Referenzen
 priority: 0.6
+image: assets/img/instaposter-kategorisieren.jpg
+image_alt: InstaPoster: Hochzeitsfotos werden automatisch in Kategorien sortiert
 ---
 # <span lang="en">InstaPoster</span>
 
