@@ -29,5 +29,5 @@ Eine [/now-Seite](https://nownownow.com/about) zeigt, worauf ich mich gerade kon
 
 ## Privat
 
-- Ich bastle hin und wieder an meinem Camper und gehe gern damit auf Reisen, am Wochenende auch auf kleine Micro-Adventures.
+- Ich bastle hin und wieder an meinem Camper und gehe gern damit auf Reisen, am Wochenende auch auf kleine <span lang="en">Micro-Adventures</span>.
 - Ich baue Möbel aus Massivholz.
