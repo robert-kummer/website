@@ -18,9 +18,13 @@ priority: 1.0
       <data class="p-brand" value="Robert Kummer IT"></data>
       <data class="u-url" value="{{site.url}}"></data>
       <div class="actions">
-        <a class="btn btn-primary" href="{{kickoff_href}}">Kickoff anfragen
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <div class="split-btn" role="group" aria-label="Kostenloses Kickoff-Gespräch">
+          <a class="btn btn-primary" href="{{kickoff_href}}">Kickoff-Termin buchen
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button type="button" class="btn btn-primary split-btn-toggle" id="kickoff-toggle-hero" popovertarget="kickoff-menu-hero" aria-label="Weitere Wege zum Kickoff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="split-menu" id="kickoff-menu-hero" popover><a href="{{kickoff_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen</a></div>
+        </div>
         <span class="meta">30 Minuten · kostenlos · unverbindlich</span>
       </div>
     </div>
@@ -207,7 +211,11 @@ priority: 1.0
           <p class="total"><span class="sr-only">Gesamtpreis: </span><span id="total">2.000 €</span></p>
           <p id="breakdown" class="meta">2 × 1.000 € · 16 Stunden · remote</p>
         </div>
-        <a class="btn btn-primary" id="calc-mail" href="{{workshop_mail}}">Workshop per E-Mail anfragen</a>
+        <div class="split-btn" role="group" aria-label="Workshop-Termin anfragen">
+          <a class="btn btn-primary" href="{{kickoff_href}}">Workshop-Termin anfragen</a>
+          <button type="button" class="btn btn-primary split-btn-toggle" id="kickoff-toggle-calc" popovertarget="kickoff-menu-calc" aria-label="Weitere Wege zur Anfrage"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="split-menu" id="kickoff-menu-calc" popover><a id="calc-mail" href="{{workshop_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen, mit dieser Auswahl</a></div>
+        </div>
       </div>
     </form>
     <p class="calc-note">Ich bin Kleinunternehmer nach §&#160;19 <abbr title="Umsatzsteuergesetz">UStG</abbr>. Alle Preise sind Endpreise: Es kommt keine Umsatzsteuer dazu, und auf der Rechnung wird keine ausgewiesen.</p>
@@ -316,10 +324,14 @@ priority: 1.0
     <h2 id="kickoff-titel" class="display-2">Welcher Ablauf kostet dich gerade am meisten Zeit<span class="dot" aria-hidden="true">?</span></h2>
     <p class="body-lg">Erzähl ihn mir in 30 Minuten. Danach weißt du, ob wir ihn an einem Wochenende lösen. Kostenlos und unverbindlich.</p>
     <div class="actions">
-      <a class="btn btn-primary btn-lg" href="{{kickoff_href}}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        Kickoff per E-Mail anfragen
-      </a>
+      <div class="split-btn" role="group" aria-label="Kostenloses Kickoff-Gespräch">
+        <a class="btn btn-primary btn-lg" href="{{kickoff_href}}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          Kickoff-Termin buchen
+        </a>
+        <button type="button" class="btn btn-primary btn-lg split-btn-toggle" id="kickoff-toggle-cta" popovertarget="kickoff-menu-cta" aria-label="Weitere Wege zum Kickoff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="split-menu" id="kickoff-menu-cta" popover><a href="{{kickoff_mail}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Per E-Mail anfragen</a></div>
+      </div>
       <a class="link-mono" href="mailto:{{person.email}}">{{person.email}}</a>
     </div>
     <p class="body-lg">Bis bald, Robert</p>

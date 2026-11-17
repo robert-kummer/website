@@ -90,7 +90,8 @@
       "In beiden Fällen gehört dir der Quellcode. Dazu die [Software Factory](https://github.com/donePM/software-factory), mit der du ohne mich weiterbaust."
     ],
     "notIncluded": "Apps für deine Kunden und SaaS-Produkte. Die brauchen Sicherheitsprüfung, Support und Betrieb, das passt nicht in 1 bis 3 Tage.",
-    "kickoff": "Kostenloses Kickoff-Gespräch, 30 Minuten, unverbindlich. Anfrage per E-Mail an post@robert-kummer.de."
+    "kickoff": "Kostenloses Kickoff-Gespräch, 30 Minuten, unverbindlich. Termin online buchen oder per E-Mail an post@robert-kummer.de anfragen.",
+    "bookingUrl": "https://cal.eu/robert-kummer/kickoff"
   },
   "faq": [
     {

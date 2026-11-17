@@ -9,7 +9,7 @@
 - Remote ohne Aufpreis, vor Ort zuzüglich Reisekosten
 - {{offer.vatNote}}
 - Kontakt: [{{person.email}}](mailto:{{person.email}}), {{person.telephone}}
-- Kostenloses Kickoff-Gespräch: 30 Minuten, unverbindlich. [Per E-Mail anfragen](mailto:{{person.email}}?subject=Kickoff-Gespr%C3%A4ch)
+- Kostenloses Kickoff-Gespräch: 30 Minuten, unverbindlich. [Termin buchen]({{offer.bookingUrl}}) oder [per E-Mail anfragen](mailto:{{person.email}}?subject=Kickoff-Gespr%C3%A4ch)
 
 ## Beispiel: Tag 1
 
