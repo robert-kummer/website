@@ -325,6 +325,9 @@ def build(args: argparse.Namespace) -> Path:
     }, quote_via=urllib.parse.quote)
     booking_url = offer.get("bookingUrl", "")
     kickoff_href = booking_url or kickoff_mail
+    # Buchungsseite eines Fremdanbieters: im neuen Tab, die Website selbst bindet nichts davon ein
+    kickoff_target = Raw(' target="_blank"') if booking_url else Raw("")
+    kickoff_newtab = Raw('<span class="sr-only"> (öffnet neuen Tab)</span>') if booking_url else Raw("")
     steps = offer["steps"]
     def step_link(s):
         link = s.get("link")
@@ -356,7 +359,7 @@ def build(args: argparse.Namespace) -> Path:
     testimonials = {k: testimonial(v) for k, v in data.get("testimonials", {}).items()}
     ctx = {
         "site": site, "person": person, "offer": offer, "base": base, "testimonial": testimonials,
-        "kickoff_href": kickoff_href, "kickoff_mail": kickoff_mail, "workshop_mail": workshop_mail, "booking_url": booking_url,
+        "kickoff_href": kickoff_href, "kickoff_target": kickoff_target, "kickoff_newtab": kickoff_newtab, "kickoff_mail": kickoff_mail, "workshop_mail": workshop_mail, "booking_url": booking_url,
         "steps_html": steps_html, "faq_html": faq_html,
         # Wiederverwendbare HTML-Bausteine aus src/partials/, z. B. {{partials.instaposter_flow}}
         "partials": {f.stem: Partial(f.read_text(encoding="utf-8").strip()) for f in sorted((SRC / "partials").glob("*.html"))},

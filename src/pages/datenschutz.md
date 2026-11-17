@@ -8,7 +8,7 @@ priority: 0.3
 ---
 # Datenschutz
 
-<p class="updated">Stand: <time datetime="2026-11">November 2026</time></p>
+<p class="updated">Stand: <time datetime="2026-11-17">17. November 2026</time></p>
 
 Kurz gesagt: Diese Website setzt keine Cookies, nutzt kein Tracking und lädt nichts von fremden Servern. Schriften, Bilder und Skripte liegen auf demselben Server wie die Seite.
 
@@ -34,6 +34,10 @@ Keine. Es gibt keine Analyse-Werkzeuge, keine Social-Media-Plugins, keine eingeb
 ## Kontakt per E-Mail oder Telefon
 
 Wenn du mir schreibst oder mich anrufst, verarbeite ich deine Angaben, um deine Anfrage zu beantworten und einen möglichen Auftrag vorzubereiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) oder lit. f (berechtigtes Interesse an der Beantwortung). Ich lösche die Daten, wenn die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten bestehen.
+
+## Terminbuchung
+
+Für das Kickoff-Gespräch kannst du online einen Termin buchen. Der Link führt zu zeeg, einem Terminbuchungsdienst der Zeeg GmbH, Friedrichstraße 155, 10117 Berlin, Deutschland. Die Buchungsseite öffnet sich in einem neuen Tab, diese Website bindet nichts davon ein. Bei der Buchung gibst du Name, E-Mail-Adresse und optional eine Nachricht an. Diese Daten verarbeitet die Zeeg GmbH in meinem Auftrag, mit ihr besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Zeeg prüft freie Zeiten anhand meines Kalenders, trägt deine Buchung dort aber nicht ein. Deine Angaben gehen dabei nicht an meinen Kalenderanbieter. Ich nutze die Angaben, um das Gespräch vorzubereiten und durchzuführen, und lösche sie, wenn sie dafür nicht mehr nötig sind und keine gesetzlichen Aufbewahrungspflichten bestehen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen). Für die Buchungsseite selbst gilt die [Datenschutzerklärung von zeeg](https://zeeg.me/de/legal/privacy).
 
 ## Deine Rechte
 
