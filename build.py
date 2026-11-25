@@ -351,7 +351,9 @@ def build(args: argparse.Namespace) -> Path:
                  '<path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3l4-7c1.7 0 2.8 1.3 2.4 3L13 10h5.6a2 2 0 0 1 2 2.4l-1.3 6A2 2 0 0 1 17.3 20H7"/></svg>')
         def fig(text, cls):
             icon = thumb if cls == "slide-quote" else ""
-            return Raw(f'<figure class="{cls}"><blockquote><p>„{html.escape(text)}“</p></blockquote>'
+            # Leerzeilen im Text trennen Absätze; Anführungszeichen umschließen das ganze Zitat
+            paras = "</p><p>".join(html.escape(p.strip()) for p in text.split("\n\n") if p.strip())
+            return Raw(f'<figure class="{cls}"><blockquote><p>„{paras}“</p></blockquote>'
                        f'<figcaption class="meta"><span>{who}</span>{icon}</figcaption></figure>') if text else Raw("")
         short, full = t.get("short", "").strip(), (t.get("full", "").strip() or t.get("short", "").strip())
         return {"short": fig(short, "slide-quote"), "full": fig(full, "testimonial"),

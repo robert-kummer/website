@@ -10,7 +10,7 @@ image_alt: InstaPoster: Hochzeitsfotos werden automatisch in Kategorien sortiert
 ---
 # <span lang="en">InstaPoster</span>
 
-<p class="updated">Für Michelle Fiedler, Hochzeitsfotografin · Mac-App · gebaut in 1,5 Tagen</p>
+<p class="updated">Für Michelle Fiedler, Hochzeitsfotografin · Mac-App · gebaut in 2 Tagen</p>
 
 {{testimonial.instaposter.full}}
 
